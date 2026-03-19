@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Control Pro - Advanced Interactive Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #0f3460;
+            --secondary: #10b981;
+            --accent: #d4af37;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark-bg: #0a1929;
+            --light-text: #f8fafc;
+            --card-bg: #0f2a42;
+        }
+        
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            color: var(--primary);
+            padding: 0.75rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Sticky Header */
+        .app-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #16475f 100%);
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 40;
+        }
+
+        .header-wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .header-stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .user-name {
+            color: var(--light-text);
+            font-weight: 600;
+        }
+
+        .user-email {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* AI Assistant Card */
+        .ai-assistant {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(212, 175, 55, 0.05));
+            border: 2px solid var(--secondary);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .ai-icon {
+            font-size: 2rem;
+        }
+
+        .ai-title {
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .ai-insight {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .insight-stat {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Tabs */
+        .tabs-wrapper {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(16, 185, 129, 0.2);
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            color: #94a3b8;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: var(--secondary);
+        }
+
+        .tab-btn.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, rgba(15, 42, 66, 0.8), rgba(16, 185, 129, 0.1));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .stat-card-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card-value {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card-label {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .stat-card-change {
+            font-size: 0.85rem;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .change-positive {
+            color: var(--secondary);
+        }
+
+        .change-negative {
+            color: var(--danger);
+        }
+
+        /* Charts */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-container {
+            background: linear-gradient(135deg, rgba(15, 42, 66, 0.8), rgba(16, 185, 129, 0.1));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .chart-container:hover {
+            border-color: var(--accent);
+        }
+
+        .chart-title {
+            font-weight: 700;
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+        }
+
+        canvas {
+            max-height: 300px;
+        }
+
+        /* Forms */
+        .form-container {
+            background: linear-gradient(135deg, rgba(15, 42, 66, 0.8), rgba(16, 185, 129, 0.1));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            color: #cbd5e1;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-input, .form-select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--light-text);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--secondary) 0%, #059669 100%);
+            color: white;
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        /* List Items */
+        .list-container {
+            background: linear-gradient(135deg, rgba(15, 42, 66, 0.8), rgba(16, 185, 129, 0.1));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 1rem;
+            padding: 2rem;
+        }
+
+        .list-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+            display: grid;
+            grid-template-columns: auto 1fr auto auto;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .list-item:hover {
+            border-color: var(--accent);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .list-item-icon {
+            font-size: 1.75rem;
+        }
+
+        .list-item-content h4 {
+            color: var(--light-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .list-item-content p {
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .list-item-amount {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .btn-delete {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid var(--danger);
+            color: #fca5a5;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-delete:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+
+        /* Insights */
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .insight-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(212, 175, 55, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .insight-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .insight-card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .insight-card-title {
+            font-weight: 700;
+            color: var(--light-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .insight-card-desc {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .insight-action {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+            color: var(--accent);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            height: 8px;
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            transition: width 0.3s ease;
+        }
+
+        .progress-fill.warning {
+            background: linear-gradient(90deg, var(--warning), var(--danger));
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #94a3b8;
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .empty-title {
+            color: var(--light-text);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Recommendations */
+        .recommendations {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(16, 185, 129, 0.05));
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .recommendation-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .recommendation-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .recommendation-content h4 {
+            color: var(--light-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .recommendation-desc {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .recommendation-save {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .app-footer {
+            background: linear-gradient(180deg, var(--primary), var(--dark-bg));
+            padding: 3rem 1rem;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+            text-align: center;
+            color: #94a3b8;
+            margin-top: 3rem;
+        }
+
+        .footer-cta {
+            margin-bottom: 2rem;
+        }
+
+        .footer-cta h3 {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+
+        .footer-btn {
+            background: linear-gradient(135deg, var(--secondary) 0%, #059669 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .footer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            color: var(--secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge.premium {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.5);
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-wrapper {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .list-item {
+                grid-template-columns: auto 1fr;
+            }
+
+            .list-item-amount, .btn-delete {
+                grid-column: 2;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Banner -->
+    <div class="top-banner">
+        ✨ Money Control Pro - Advanced Demo | Test Full Features Interactively
+    </div>
+
+    <!-- Header -->
+    <div class="app-header">
+        <div class="header-wrapper">
+            <div class="header-brand">💰 Money Control Pro</div>
+            <div class="header-stats">
+                <div class="header-stat">
+                    <div class="stat-value" id="headerTotalSpent">₹0</div>
+                    <div class="stat-label">Total Spent</div>
+                </div>
+                <div class="header-stat">
+                    <div class="stat-value" id="headerBalance">₹0</div>
+                    <div class="stat-label">Available</div>
+                </div>
+                <div class="header-stat">
+                    <div class="stat-value" id="headerSaved">₹0</div>
+                    <div class="stat-label">Saved This Month</div>
+                </div>
+            </div>
+            <div class="user-profile">
+                <div class="avatar">VP</div>
+                <div>
+                    <div class="user-name">vaibhav palve</div>
+                    <div class="user-email">vaibhav@example.com</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- AI Assistant -->
+        <div class="ai-assistant">
+            <div class="ai-header">
+                <div class="ai-icon">🤖</div>
+                <div>
+                    <div class="ai-title">Financial Brain AI Insights</div>
+                </div>
+            </div>
+            <div class="ai-insight">
+                📊 <strong>Analysis:</strong> You've spent <span class="insight-stat">₹<span id="aiTotalSpent">0</span></span> this month across <span class="insight-stat" id="aiCategories">0</span> categories. Your top spending is on <span class="insight-stat" id="aiTopCategory">Food</span>. Based on your pattern, you can save <span class="insight-stat">₹<span id="aiSavings">0</span>/month</span> by optimizing spending. 💡 <strong>Recommendation:</strong> <span id="aiRecommendation">Add your first expense to get personalized insights</span>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs-wrapper">
+            <button class="tab-btn active" data-tab="overview">📊 Overview</button>
+            <button class="tab-btn" data-tab="expenses">💸 Expenses</button>
+            <button class="tab-btn" data-tab="budget">🎯 Budgets</button>
+            <button class="tab-btn" data-tab="goals">🏆 Goals</button>
+            <button class="tab-btn" data-tab="insights">💡 AI Insights</button>
+            <button class="tab-btn" data-tab="community">👥 Community</button>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <h2 style="margin-bottom: 2rem; color: var(--light-text);">Your Financial Overview</h2>
+
+            <!-- Dashboard Stats -->
+            <div class="dashboard-grid">
+                <div class="stat-card">
+                    <div class="stat-card-icon">💰</div>
+                    <div class="stat-card-value" id="dashTotalSpent">₹0</div>
+                    <div class="stat-card-label">Total Spent</div>
+                    <div class="stat-card-change">
+                        <span class="change-positive">📈 +12% from last month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-icon">🎯</div>
+                    <div class="stat-card-value" id="dashAverage">₹0</div>
+                    <div class="stat-card-label">Average Per Transaction</div>
+                    <div class="stat-card-change">
+                        <span class="change-positive">📉 -8% optimization</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-icon">🏆</div>
+                    <div class="stat-card-value" id="dashCategory">-</div>
+                    <div class="stat-card-label">Top Spending Category</div>
+                    <div class="stat-card-change">
+                        <span class="change-negative">⚠️ 42% of total</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-icon">📊</div>
+                    <div class="stat-card-value" id="dashTransactions">0</div>
+                    <div class="stat-card-label">Transactions</div>
+                    <div class="stat-card-change">
+                        <span>Tracked this month</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">💰 Spending Trend (Last 7 Days)</div>
+                    <canvas id="trendChart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-title">🍕 Spending by Category</div>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Health Score -->
+            <div class="chart-container">
+                <div class="chart-title">💚 Financial Health Score</div>
+                <div style="padding: 1rem 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                        <span>Overall Score</span>
+                        <span style="font-size: 1.5rem; font-weight: 900; color: var(--accent);" id="healthScore">-</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="healthBar" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
+                    <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 0.5rem;">
+                        <div style="color: var(--accent); font-weight: 700;">Spending Control</div>
+                        <div style="color: #94a3b8; font-size: 0.9rem;">75/100</div>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 0.5rem;">
+                        <div style="color: var(--accent); font-weight: 700;">Budget Adherence</div>
+                        <div style="color: #94a3b8; font-size: 0.9rem;">68/100</div>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 0.5rem;">
+                        <div style="color: var(--accent); font-weight: 700;">Savings Rate</div>
+                        <div style="color: #94a3b8; font-size: 0.9rem;">82/100</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expenses Tab -->
+        <div id="expenses" class="tab-content">
+            <h2 style="margin-bottom: 2rem; color: var(--light-text);">Add & Track Expenses</h2>
+
+            <div class="form-container">
+                <h3 style="margin-bottom: 1.5rem; color: var(--light-text);">➕ Record New Expense</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <input type="text" id="expenseName" class="form-input" placeholder="e.g., Coffee at Cafe">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Amount (₹)</label>
+                        <input type="number" id="expenseAmount" class="form-input" placeholder="0" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select id="expenseCategory" class="form-select">
+                            <option value="food">🍔 Food & Dining</option>
+                            <option value="transport">🚗 Transport</option>
+                            <option value="entertainment">🎬 Entertainment</option>
+                            <option value="shopping">🛍️ Shopping</option>
+                            <option value="utilities">💡 Utilities</option>
+                            <option value="health">⚕️ Health & Fitness</option>
+                            <option value="education">📚 Education</option>
+                            <option value="subscriptions">🎵 Subscriptions</option>
+                            <option value="other">📌 Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" id="expenseDate" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Payment Method</label>
+                        <select id="expensePayment" class="form-select">
+                            <option value="cash">💵 Cash</option>
+                            <option value="upi">📱 UPI</option>
+                            <option value="card">💳 Credit Card</option>
+                            <option value="debit">💳 Debit Card</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Notes (Optional)</label>
+                        <input type="text" id="expenseNotes" class="form-input" placeholder="Add any notes...">
+                    </div>
+                </div>
+                <button class="btn" onclick="addExpense()">💾 Record Expense</button>
+            </div>
+
+            <h3 style="margin-bottom: 1.5rem; margin-top: 2rem; color: var(--light-text);">Recent Transactions</h3>
+            <div class="list-container">
+                <div id="expensesList">
+                    <div class="empty-state">
+                        <div class="empty-icon">📝</div>
+                        <div class="empty-title">No expenses yet</div>
+                        <p>Add your first expense to start tracking!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Budget Tab -->
+        <div id="budget" class="tab-content">
+            <h2 style="margin-bottom: 2rem; color: var(--light-text);">Budget Management</h2>
+
+            <div class="form-container">
+                <h3 style="margin-bottom: 1.5rem; color: var(--light-text);">🎯 Set Category Budget</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select id="budgetCategory" class="form-select">
+                            <option value="food">🍔 Food & Dining</option>
+                            <option value="transport">🚗 Transport</option>
+                            <option value="entertainment">🎬 Entertainment</option>
+                            <option value="shopping">🛍️ Shopping</option>
+                            <option value="utilities">💡 Utilities</option>
+                            <option value="health">⚕️ Health & Fitness</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Monthly Budget (₹)</label>
+                        <input type="number" id="budgetAmount" class="form-input" placeholder="5000" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">&nbsp;</label>
+                        <button class="btn" onclick="addBudget()">➕ Create Budget</button>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 1.5rem; margin-top: 2rem; color: var(--light-text);">📋 Your Budgets</h3>
+            <div class="list-container">
+                <div id="budgetsList">
+                    <div class="empty-state">
+                        <div class="empty-icon">📊</div>
+                        <div class="empty-title">No budgets yet</div>
+                        <p>Create budgets to stay on track!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Goals Tab -->
+        <div id="goals" class="tab-content">
+            <h2 style="margin-bottom: 2rem; color: var(--light-text);">Financial Goals</h2>
+
+            <div class="form-container">
+                <h3 style="margin-bottom: 1.5rem; color: var(--light-text);">🏆 Create New Goal</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label">Goal Name</label>
+                        <input type="text" id="goalName" class="form-input" placeholder="e.g., Emergency Fund">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Target Amount (₹)</label>
+                        <input type="number" id="goalAmount" class="form-input" placeholder="100000" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Target Date</label>
+                        <input type="date" id="goalDate" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Current Saved (₹)</label>
+                        <input type="number" id="goalSaved" class="form-input" placeholder="0" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Goal Category</label>
+                        <select id="goalCategory" class="form-select">
+                            <option value="emergency">🆘 Emergency Fund</option>
+                            <option value="travel">✈️ Travel</option>
+                            <option value="home">🏠 Home</option>
+                            <option value="vehicle">🚗 Vehicle</option>
+                            <option value="education">📚 Education</option>
+                            <option value="wedding">💒 Wedding</option>
+                            <option value="investment">📈 Investment</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">&nbsp;</label>
+                        <button class="btn" onclick="addGoal()">🎯 Create Goal</button>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 1.5rem; margin-top: 2rem; color: var(--light-text);">Your Goals</h3>
+            <div id="goalsList" class="insights-grid">
+                <div class="empty-state" style="grid-column: 1/-1;">
+                    <div class="empty-icon">🏆</div>
+                    <div class="empty-title">No goals yet</div>
+                    <p>Create goals to achieve financial milestones!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insights Tab -->
+        <div id="insights" class="tab-content">
+            <h2 style="margin-bottom: 2rem; color: var(--light-text);">🤖 AI-Powered Insights</h2>
+
+            <div class="recommendations">
+                <h3 style="margin-bottom: 1.5rem; color: var(--light-text);">💡 Smart Recommendations</h3>
+                <div id="recommendationsList">
+                    <div style="text-align: center; color: #94a3b8; padding: 2rem;">
+                        Add expenses to get personalized recommendations
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-bottom: 2rem; color: var(--light-text);">📊 Detailed Analysis</h3>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-card-icon">📈</div>
+                    <div class="insight-card-title">Spending Trend</div>
+                    <div class="insight-card-desc" id="insightSpending">
+                        No data yet. Add expenses to see trends.
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="insight-card-icon">💰</div>
+                    <div class="insight-card-title">Savings Opportunity</div>
+                    <div class="insight-card-desc" id="insightSavings">
+                        No data yet. Add expenses to analyze savings.
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="insight-card-icon">🎯</div>
+                    <div class="insight-card-title">Budget Health</div>
+                    <div class="insight-card-desc" id="insightBudget">
+                        No budgets yet. Create budgets to track health.
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="insight-card-icon">⚠️</div>
+                    <div class="insight-card-title">Spending Alerts</div>
+                    <div class="insight-card-desc" id="insightAlerts">
+                        No alerts. Your spending is under control!
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="insight-card-icon">🔄</div>
+                    <div class="insight-card-title">Subscription Audit</div>
+                    <div class="insight-card-desc" id="insightSubscriptions">
+                        No data. Track subscriptions to find savings.
+                    </div>
+                </div>
+
+                <div class="insight-card">
+                    <div class="insight-card-icon">💡</div>
+                    <div class="insight-card-title">AI Recommendation</div>
+                    <div class="insight-card-desc" id="insightAI">
+                        Get started by adding expenses and budgets.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Community Tab -->
+        <div id="community" class="tab-content">
+            <h2 style="margin-bottom: 2rem; color: var(--light-text);">👥 Community & Tips</h2>
+
+            <div class="list-container">
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="color: var(--light-text); margin-bottom: 1.5rem;">💬 Latest Tips from Community</h3>
+                    
+                    <div class="list-item">
+                        <div class="list-item-icon">💡</div>
+                        <div class="list-item-content">
+                            <h4>50/30/20 Budget Rule</h4>
+                            <p>Allocate 50% to needs, 30% to wants, 20% to savings. Track with Money Control Pro!</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="color: var(--accent); font-weight: 600;">👍 234</div>
+                            <div style="color: #94a3b8; font-size: 0.8rem;">likes</div>
+                        </div>
+                    </div>
+
+                    <div class="list-item">
+                        <div class="list-item-icon">🎯</div>
+                        <div class="list-item-content">
+                            <h4>Track Subscriptions Monthly</h4>
+                            <p>Review all subscriptions every month. Found ₹15K in forgotten services!</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="color: var(--accent); font-weight: 600;">👍 567</div>
+                            <div style="color: #94a3b8; font-size: 0.8rem;">likes</div>
+                        </div>
+                    </div>
+
+                    <div class="list-item">
+                        <div class="list-item-icon">💰</div>
+                        <div class="list-item-content">
+                            <h4>Emergency Fund First</h4>
+                            <p>Build 6 months of expenses as emergency fund before other goals. Game changer!</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="color: var(--accent); font-weight: 600;">👍 892</div>
+                            <div style="color: #94a3b8; font-size: 0.8rem;">likes</div>
+                        </div>
+                    </div>
+
+                    <div class="list-item">
+                        <div class="list-item-icon">🍔</div>
+                        <div class="list-item-content">
+                            <h4>Meal Prep = Save ₹25K/Month</h4>
+                            <p>Meal prepping on Sundays saved me ₹800/week. Track with Money Control Pro!</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="color: var(--accent); font-weight: 600;">👍 1.2K</div>
+                            <div style="color: #94a3b8; font-size: 0.8rem;">likes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="app-footer">
+        <div class="footer-cta">
+            <h3>✨ Want Unlimited Features?</h3>
+            <p style="margin-bottom: 1rem;">Upgrade to Pro for AI Financial Brain, Advanced Analytics & More</p>
+            <button class="footer-btn">🚀 Upgrade Now (₹299/month)</button>
+        </div>
+        <p style="margin-top: 2rem; color: #64748b;">
+            💰 Money Control Pro © 2026 | Helping 50,000+ Indians manage money smarter
+        </p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script>
+        // Initialize
+        let expenses = [];
+        let budgets = {};
+        let goals = [];
+        let chartInstances = {};
+
+        // Load sample data on startup
+        function loadSampleData() {
+            expenses = [
+                { id: 1, name: 'Morning Coffee', amount: 120, category: 'food', date: new Date(Date.now() - 86400000*6), payment: 'upi', notes: '' },
+                { id: 2, name: 'Lunch - Restaurant', amount: 450, category: 'food', date: new Date(Date.now() - 86400000*6), payment: 'card', notes: '' },
+                { id: 3, name: 'Uber Ride', amount: 250, category: 'transport', date: new Date(Date.now() - 86400000*5), payment: 'upi', notes: '' },
+                { id: 4, name: 'Movie Ticket', amount: 300, category: 'entertainment', date: new Date(Date.now() - 86400000*4), payment: 'cash', notes: '' },
+                { id: 5, name: 'Grocery Shopping', amount: 1200, category: 'food', date: new Date(Date.now() - 86400000*3), payment: 'card', notes: '' },
+                { id: 6, name: 'Gym Membership', amount: 500, category: 'health', date: new Date(Date.now() - 86400000*2), payment: 'upi', notes: '' },
+                { id: 7, name: 'Netflix Subscription', amount: 199, category: 'subscriptions', date: new Date(Date.now() - 86400000), payment: 'card', notes: '' },
+                { id: 8, name: 'Starbucks', amount: 280, category: 'food', date: new Date(), payment: 'card', notes: '' },
+            ];
+
+            budgets = {
+                food: { category: 'food', amount: 5000, icon: '🍔' },
+                transport: { category: 'transport', amount: 2000, icon: '🚗' },
+                entertainment: { category: 'entertainment', amount: 1500, icon: '🎬' },
+            };
+
+            goals = [
+                { id: 1, name: 'Emergency Fund', amount: 500000, current: 150000, date: '2025-12-31', category: 'emergency' },
+                { id: 2, name: 'Dream Vacation', amount: 200000, current: 45000, date: '2025-06-30', category: 'travel' },
+            ];
+
+            updateAll();
+        }
+
+        // Tab Navigation
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                e.target.classList.add('active');
+                const tabId = e.target.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Set today's date
+        document.getElementById('expenseDate').valueAsDate = new Date();
+        document.getElementById('goalDate').valueAsDate = new Date(Date.now() + 30*86400000);
+
+        // Add Expense
+        function addExpense() {
+            const name = document.getElementById('expenseName').value;
+            const amount = parseFloat(document.getElementById('expenseAmount').value);
+            const category = document.getElementById('expenseCategory').value;
+            const date = new Date(document.getElementById('expenseDate').value);
+            const payment = document.getElementById('expensePayment').value;
+            const notes = document.getElementById('expenseNotes').value;
+
+            if (!name || !amount || !category) {
+                alert('Please fill required fields');
+                return;
+            }
+
+            expenses.push({
+                id: Date.now(),
+                name,
+                amount,
+                category,
+                date,
+                payment,
+                notes
+            });
+
+            document.getElementById('expenseName').value = '';
+            document.getElementById('expenseAmount').value = '';
+            document.getElementById('expenseNotes').value = '';
+            document.getElementById('expenseDate').valueAsDate = new Date();
+
+            updateAll();
+        }
+
+        // Add Budget
+        function addBudget() {
+            const category = document.getElementById('budgetCategory').value;
+            const amount = parseFloat(document.getElementById('budgetAmount').value);
+
+            if (!amount || amount <= 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+
+            const categoryEmojis = {
+                food: '🍔',
+                transport: '🚗',
+                entertainment: '🎬',
+                shopping: '🛍️',
+                utilities: '💡',
+                health: '⚕️',
+            };
+
+            budgets[category] = {
+                category,
+                amount,
+                icon: categoryEmojis[category] || '📌'
+            };
+
+            document.getElementById('budgetAmount').value = '';
+            updateAll();
+        }
+
+        // Delete Budget
+        function deleteBudget(category) {
+            delete budgets[category];
+            updateAll();
+        }
+
+        // Add Goal
+        function addGoal() {
+            const name = document.getElementById('goalName').value;
+            const amount = parseFloat(document.getElementById('goalAmount').value);
+            const date = document.getElementById('goalDate').value;
+            const saved = parseFloat(document.getElementById('goalSaved').value) || 0;
+            const category = document.getElementById('goalCategory').value;
+
+            if (!name || !amount || !date) {
+                alert('Please fill required fields');
+                return;
+            }
+
+            goals.push({
+                id: Date.now(),
+                name,
+                amount,
+                current: saved,
+                date,
+                category
+            });
+
+            document.getElementById('goalName').value = '';
+            document.getElementById('goalAmount').value = '';
+            document.getElementById('goalSaved').value = '';
+            updateAll();
+        }
+
+        // Delete Goal
+        function deleteGoal(id) {
+            goals = goals.filter(g => g.id !== id);
+            updateAll();
+        }
+
+        // Delete Expense
+        function deleteExpense(id) {
+            expenses = expenses.filter(e => e.id !== id);
+            updateAll();
+        }
+
+        // Update All
+        function updateAll() {
+            updateStats();
+            updateExpensesList();
+            updateBudgetsList();
+            updateGoalsList();
+            updateCharts();
+            updateInsights();
+            updateAIInsights();
+        }
+
+        // Update Stats
+        function updateStats() {
+            const total = expenses.reduce((sum, e) => sum + e.amount, 0);
+            const monthlyIncome = 150000;
+            const saved = monthlyIncome - total;
+            const categories = new Set(expenses.map(e => e.category)).size;
+
+            document.getElementById('headerTotalSpent').textContent = '₹' + total.toLocaleString();
+            document.getElementById('headerBalance').textContent = '₹' + saved.toLocaleString();
+            document.getElementById('headerSaved').textContent = '₹' + (monthlyIncome * 0.2).toLocaleString();
+
+            document.getElementById('dashTotalSpent').textContent = '₹' + total.toLocaleString();
+            document.getElementById('dashAverage').textContent = '₹' + (expenses.length > 0 ? Math.round(total / expenses.length) : 0).toLocaleString();
+            document.getElementById('dashTransactions').textContent = expenses.length;
+
+            const topCat = Object.entries(
+                expenses.reduce((acc, e) => {
+                    acc[e.category] = (acc[e.category] || 0) + e.amount;
+                    return acc;
+                }, {})
+            ).sort((a, b) => b[1] - a[1])[0];
+
+            const categoryEmojis = {
+                food: '🍔 Food',
+                transport: '🚗 Transport',
+                entertainment: '🎬 Entertainment',
+                shopping: '🛍️ Shopping',
+                utilities: '💡 Utilities',
+                health: '⚕️ Health',
+                education: '📚 Education',
+                subscriptions: '🎵 Subscriptions',
+                other: '📌 Other'
+            };
+
+            document.getElementById('dashCategory').textContent = topCat ? categoryEmojis[topCat[0]] : '-';
+
+            // Health Score
+            const budgetHealth = Object.keys(budgets).length > 0 ? 75 : 50;
+            const spendingControl = Math.max(0, 100 - (total / 50000 * 100));
+            const healthScore = Math.round((budgetHealth + spendingControl + 85) / 3);
+            document.getElementById('healthScore').textContent = healthScore;
+            document.getElementById('healthBar').style.width = healthScore + '%';
+
+            // AI Stats
+            document.getElementById('aiTotalSpent').textContent = total.toLocaleString();
+            document.getElementById('aiCategories').textContent = categories;
+            document.getElementById('aiTopCategory').textContent = topCat ? categoryEmojis[topCat[0]].split(' ')[1] : 'No data';
+            document.getElementById('aiSavings').textContent = Math.round(total * 0.15);
+        }
+
+        // Update Expenses List
+        function updateExpensesList() {
+            const list = document.getElementById('expensesList');
+            const categoryEmojis = {
+                food: '🍔',
+                transport: '🚗',
+                entertainment: '🎬',
+                shopping: '🛍️',
+                utilities: '💡',
+                health: '⚕️',
+                education: '📚',
+                subscriptions: '🎵',
+                other: '📌'
+            };
+
+            if (expenses.length === 0) {
+                list.innerHTML = `<div class="empty-state">
+                    <div class="empty-icon">📝</div>
+                    <div class="empty-title">No expenses yet</div>
+                    <p>Add your first expense to start tracking!</p>
+                </div>`;
+                return;
+            }
+
+            list.innerHTML = [...expenses].reverse().map(exp => `
+                <div class="list-item">
+                    <div class="list-item-icon">${categoryEmojis[exp.category]}</div>
+                    <div class="list-item-content">
+                        <h4>${exp.name}</h4>
+                        <p>${new Date(exp.date).toLocaleDateString('en-IN')} • ${exp.payment.toUpperCase()}</p>
+                    </div>
+                    <div class="list-item-amount">₹${exp.amount.toLocaleString()}</div>
+                    <button class="btn-delete" onclick="deleteExpense(${exp.id})">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        // Update Budgets List
+        function updateBudgetsList() {
+            const list = document.getElementById('budgetsList');
+
+            if (Object.keys(budgets).length === 0) {
+                list.innerHTML = `<div class="empty-state">
+                    <div class="empty-icon">📊</div>
+                    <div class="empty-title">No budgets yet</div>
+                    <p>Create budgets to stay on track!</p>
+                </div>`;
+                return;
+            }
+
+            const categoryNames = {
+                food: 'Food & Dining',
+                transport: 'Transport',
+                entertainment: 'Entertainment',
+                shopping: 'Shopping',
+                utilities: 'Utilities',
+                health: 'Health & Fitness',
+                education: 'Education'
+            };
+
+            list.innerHTML = Object.values(budgets).map(budget => {
+                const spent = expenses
+                    .filter(e => e.category === budget.category)
+                    .reduce((sum, e) => sum + e.amount, 0);
+                
+                const percentage = (spent / budget.amount) * 100;
+                const status = percentage > 100 ? 'Over Budget!' : percentage > 80 ? 'Warning' : 'On Track';
+
+                return `
+                    <div class="list-item">
+                        <div class="list-item-icon">${budget.icon}</div>
+                        <div class="list-item-content">
+                            <h4>${budget.icon} ${categoryNames[budget.category]}</h4>
+                            <div class="progress-bar" style="margin-top: 0.5rem;">
+                                <div class="progress-fill ${percentage > 80 ? 'warning' : ''}" style="width: ${Math.min(percentage, 100)}%"></div>
+                            </div>
+                            <p style="margin-top: 0.5rem;">₹${spent.toLocaleString()} / ₹${budget.amount.toLocaleString()} (${percentage.toFixed(0)}%)</p>
+                        </div>
+                        <button class="btn-delete" onclick="deleteBudget('${budget.category}')">Delete</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Update Goals List
+        function updateGoalsList() {
+            const list = document.getElementById('goalsList');
+
+            if (goals.length === 0) {
+                list.innerHTML = `<div class="empty-state" style="grid-column: 1/-1;">
+                    <div class="empty-icon">🏆</div>
+                    <div class="empty-title">No goals yet</div>
+                    <p>Create goals to achieve financial milestones!</p>
+                </div>`;
+                return;
+            }
+
+            const categoryIcons = {
+                emergency: '🆘',
+                travel: '✈️',
+                home: '🏠',
+                vehicle: '🚗',
+                education: '📚',
+                wedding: '💒',
+                investment: '📈'
+            };
+
+            list.innerHTML = goals.map(goal => {
+                const progress = (goal.current / goal.amount) * 100;
+                const daysLeft = Math.ceil((new Date(goal.date) - new Date()) / 86400000);
+                const monthlyNeeded = Math.ceil((goal.amount - goal.current) / Math.max(1, daysLeft / 30));
+
+                return `
+                    <div class="insight-card">
+                        <div class="insight-card-icon">${categoryIcons[goal.category]}</div>
+                        <div class="insight-card-title">${goal.name}</div>
+                        <div style="margin-bottom: 1rem;">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${progress}%"></div>
+                            </div>
+                            <p style="margin-top: 0.5rem; color: #94a3b8; font-size: 0.85rem;">
+                                ₹${goal.current.toLocaleString()} / ₹${goal.amount.toLocaleString()}
+                            </p>
+                        </div>
+                        <div style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 1rem;">
+                            <p>📅 Target: ${new Date(goal.date).toLocaleDateString('en-IN')}</p>
+                            <p>💰 Need: ₹${monthlyNeeded.toLocaleString()}/month</p>
+                            <p>⏳ ${daysLeft} days left</p>
+                        </div>
+                        <div class="insight-action" onclick="deleteGoal(${goal.id})">Remove Goal</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Update Charts
+        function updateCharts() {
+            // Trend Chart
+            const last7Days = [];
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date(Date.now() - i * 86400000);
+                const dayExpenses = expenses.filter(e => new Date(e.date).toDateString() === date.toDateString());
+                const total = dayExpenses.reduce((sum, e) => sum + e.amount, 0);
+                last7Days.push({
+                    date: date.toLocaleDateString('en-IN', { weekday: 'short' }),
+                    amount: total
+                });
+            }
+
+            const trendCtx = document.getElementById('trendChart').getContext('2d');
+            if (chartInstances.trend) chartInstances.trend.destroy();
+            chartInstances.trend = new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: last7Days.map(d => d.date),
+                    datasets: [{
+                        label: 'Daily Spending',
+                        data: last7Days.map(d => d.amount),
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#94a3b8' },
+                            grid: { color: 'rgba(16, 185, 129, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#94a3b8' },
+                            grid: { color: 'rgba(16, 185, 129, 0.1)' }
+                        }
+                    }
+                }
+            });
+
+            // Category Chart
+            const categories = {};
+            expenses.forEach(e => {
+                categories[e.category] = (categories[e.category] || 0) + e.amount;
+            });
+
+            const categoryNames = {
+                food: 'Food',
+                transport: 'Transport',
+                entertainment: 'Entertainment',
+                shopping: 'Shopping',
+                utilities: 'Utilities',
+                health: 'Health',
+                education: 'Education',
+                subscriptions: 'Subscriptions',
+                other: 'Other'
+            };
+
+            const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+            if (chartInstances.category) chartInstances.category.destroy();
+            chartInstances.category = new Chart(categoryCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(categories).map(k => categoryNames[k] || k),
+                    datasets: [{
+                        data: Object.values(categories),
+                        backgroundColor: [
+                            '#10b981',
+                            '#d4af37',
+                            '#f59e0b',
+                            '#ef4444',
+                            '#3b82f6',
+                            '#8b5cf6',
+                            '#ec4899',
+                            '#14b8a6',
+                            '#f97316'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#94a3b8' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update Insights
+        function updateInsights() {
+            const total = expenses.reduce((sum, e) => sum + e.amount, 0);
+            const avgExpense = expenses.length > 0 ? total / expenses.length : 0;
+            
+            // Spending Insight
+            if (expenses.length > 0) {
+                const trend = total > 50000 ? '📈 Higher than budget' : '✅ Within budget';
+                document.getElementById('insightSpending').textContent = `You've spent ₹${total.toLocaleString()} across ${expenses.length} transactions. ${trend}`;
+            }
+
+            // Savings Opportunity
+            if (total > 0) {
+                const savings = Math.round(total * 0.15);
+                document.getElementById('insightSavings').textContent = `Based on your spending, you could save ₹${savings.toLocaleString()} per month by optimizing.`;
+            }
+
+            // Budget Health
+            const budgetCount = Object.keys(budgets).length;
+            if (budgetCount > 0) {
+                let overBudget = 0;
+                Object.values(budgets).forEach(b => {
+                    const spent = expenses.filter(e => e.category === b.category).reduce((sum, e) => sum + e.amount, 0);
+                    if (spent > b.amount) overBudget++;
+                });
+                document.getElementById('insightBudget').textContent = `${budgetCount - overBudget}/${budgetCount} budgets on track. Keep it up! 💪`;
+            }
+
+            // Subscriptions
+            const subscriptions = expenses.filter(e => e.category === 'subscriptions');
+            if (subscriptions.length > 0) {
+                const subTotal = subscriptions.reduce((sum, e) => sum + e.amount, 0);
+                document.getElementById('insightSubscriptions').textContent = `You have ${subscriptions.length} subscriptions costing ₹${subTotal.toLocaleString()}/month. Review monthly!`;
+            }
+
+            // Alerts
+            const highSpenders = Object.entries(
+                expenses.reduce((acc, e) => {
+                    acc[e.category] = (acc[e.category] || 0) + e.amount;
+                    return acc;
+                }, {})
+            ).filter(([cat, amount]) => budgets[cat] && amount > budgets[cat].amount);
+
+            if (highSpenders.length > 0) {
+                document.getElementById('insightAlerts').textContent = `⚠️ ${highSpenders.length} categories over budget. Check your spending!`;
+            }
+        }
+
+        // Update AI Insights
+        function updateAIInsights() {
+            const total = expenses.reduce((sum, e) => sum + e.amount, 0);
+            const avgExpense = expenses.length > 0 ? total / expenses.length : 0;
+
+            if (expenses.length > 3) {
+                const food = expenses.filter(e => e.category === 'food').reduce((sum, e) => sum + e.amount, 0);
+                const foodPercent = ((food / total) * 100).toFixed(0);
+                const savings = Math.round(total * 0.15);
+                const foodSavings = Math.round(food * 0.2);
+
+                document.getElementById('aiRecommendation').innerHTML = `
+                    <strong>Food spending is ${foodPercent}% of your budget</strong> - Consider meal planning to save ₹${foodSavings}/month. 
+                    Total optimization potential: <strong>₹${savings}/month</strong>
+                `;
+            }
+        }
+
+        // Load sample data on startup
+        loadSampleData();
+    </script>
+</body>
+</html>
