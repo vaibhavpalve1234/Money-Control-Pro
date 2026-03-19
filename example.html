@@ -1,0 +1,2426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Control Pro - Personal Financial Operating System 2050</title>
+    <meta name="description"
+        content="AI-powered personal finance OS with Financial Brain, PFOS system, investment tracking, and life planning. Built for India, designed for global scale.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f3460;
+            --primary-light: #16475f;
+            --secondary: #10b981;
+            --secondary-light: #34d399;
+            --accent: #d4af37;
+            --accent-light: #f4d57d;
+            --dark-bg: #0a1929;
+            --light-text: #f8fafc;
+            --card-bg: #0f2a42;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        nav .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #10b981;
+        }
+
+        nav .nav-links {
+            display: none;
+            gap: 1.5rem;
+            color: var(--light-text);
+            font-size: 0.95rem;
+        }
+
+        nav .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            nav .nav-links {
+                display: flex;
+            }
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            color: var(--secondary-light);
+            padding: 0.375rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary) 0%, #059669 100%);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            padding: 0.875rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            border: 2px solid var(--secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(16, 185, 129, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.875rem;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a5c7a 50%, var(--secondary) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 5rem;
+            right: 2.5rem;
+            width: 24rem;
+            height: 24rem;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            filter: blur(96px);
+            z-index: 1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 20rem;
+            height: 20rem;
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: 50%;
+            filter: blur(96px);
+            z-index: 1;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 3.75rem;
+            }
+        }
+
+        .hero h1 .accent {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (min-width: 640px) {
+            .hero-buttons {
+                flex-direction: row;
+            }
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            margin-top: 2rem;
+            font-size: 0.875rem;
+        }
+
+        .hero-stat-number {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-stat-label {
+            color: #94a3b8;
+        }
+
+        .hero-image {
+            position: relative;
+            height: 24rem;
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .hero-image {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        .hero-image-card {
+            background: rgba(15, 42, 66, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .hero-image-card:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+            background: rgba(15, 42, 66, 0.8);
+        }
+
+        .hero-image-card .emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-image-card .title {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.125rem;
+        }
+
+        .hero-image-card .subtitle {
+            color: #94a3b8;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(to bottom, var(--primary), var(--dark-bg));
+            padding: 5rem 1rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-sublabel {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        /* AI Brain Section */
+        .ai-brain {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a5c7a 100%);
+            padding: 6rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-brain::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        .ai-brain .container {
+            position: relative;
+            z-index: 10;
+        }
+
+        .ai-brain-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .ai-brain-header h2 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .ai-brain-header p {
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .ai-brain-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        @media (min-width: 1024px) {
+            .ai-brain-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .ai-brain-demo {
+            background: rgba(15, 42, 66, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 1rem;
+            padding: 2rem;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .chat-message {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .chat-message.bot {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 3px solid var(--secondary);
+            color: #cbd5e1;
+        }
+
+        .chat-message.user {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 3px solid var(--accent);
+            color: var(--accent);
+            margin-left: auto;
+            max-width: 85%;
+        }
+
+        .ai-brain-features {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .ai-feature {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .ai-feature:hover {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--accent);
+        }
+
+        .ai-feature h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .ai-feature p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        /* Features Grid Section */
+        .features {
+            background-color: var(--dark-bg);
+            padding: 6rem 1rem;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-header p {
+            font-size: 1.25rem;
+            color: #94a3b8;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(15, 42, 66, 0.8), rgba(16, 185, 129, 0.1));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-1rem);
+            border-color: var(--accent);
+            box-shadow: 0 20px 25px -5px rgba(212, 175, 55, 0.2);
+        }
+
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            transition: background 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            background: rgba(212, 175, 55, 0.4);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--light-text);
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-card p {
+            color: #94a3b8;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .feature-list li {
+            padding: 0.35rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .feature-link {
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .feature-link:hover {
+            gap: 0.75rem;
+        }
+
+        /* Social Proof - Real Outcomes */
+        .social-proof {
+            background-color: var(--dark-bg);
+            padding: 4rem 1rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .proof-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .proof-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+
+        .proof-header p {
+            color: #cbd5e1;
+            font-size: 1.125rem;
+        }
+
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .proof-card {
+            background: linear-gradient(135deg, rgba(15, 42, 66, 0.8), rgba(16, 185, 129, 0.1));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .proof-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 25px -5px rgba(212, 175, 55, 0.2);
+        }
+
+        .proof-stat {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .proof-title {
+            font-weight: 600;
+            color: var(--light-text);
+            margin-bottom: 0.75rem;
+        }
+
+        .proof-desc {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        /* Problem-Solution Section */
+        .problem-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a5c7a 100%);
+            padding: 6rem 1rem;
+        }
+
+        .problem-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .problem-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .problem-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+
+        .problem-header p {
+            font-size: 1.125rem;
+            color: #cbd5e1;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--accent);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .problem-card:hover {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .problem-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-title {
+            font-weight: 700;
+            color: var(--light-text);
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+        }
+
+        .problem-desc {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        /* Solution Section */
+        .solution-section {
+            background-color: var(--dark-bg);
+            padding: 6rem 1rem;
+        }
+
+        .solution-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .solution-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .solution-header p {
+            font-size: 1.125rem;
+            color: #cbd5e1;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .solution-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(212, 175, 55, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .solution-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .solution-title {
+            font-weight: 700;
+            color: var(--light-text);
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+        }
+
+        .solution-desc {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+
+        /* Problem-Solution Section */
+        .problem-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a5c7a 100%);
+            padding: 6rem 1rem;
+        }
+
+        .problem-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .problem-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .problem-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+
+        .problem-header p {
+            font-size: 1.125rem;
+            color: #cbd5e1;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--accent);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .problem-card:hover {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .problem-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-title {
+            font-weight: 700;
+            color: var(--light-text);
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+        }
+
+        .problem-desc {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        /* PFOS Features Section */
+        .pfos-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 6rem 1rem;
+        }
+
+        .pfos-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pfos-header h2 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .pfos-header p {
+            font-size: 1.125rem;
+            color: #cbd5e1;
+        }
+
+        .pfos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .pfos-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .pfos-card:hover {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--accent);
+            transform: translateY(-0.5rem);
+        }
+
+        .pfos-card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+            color: var(--accent-light);
+        }
+
+        .pfos-card-desc {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .pfos-card-features {
+            list-style: none;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .pfos-card-features li {
+            padding: 0.35rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .pfos-card-features li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-light);
+        }
+
+        /* Advanced Features */
+        .advanced {
+            background-color: var(--dark-bg);
+            padding: 6rem 1rem;
+        }
+
+        .advanced-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .advanced-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .advanced-card {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(16, 185, 129, 0.1));
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .advanced-card:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .advanced-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .advanced-card h3 {
+            color: var(--accent-light);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .advanced-card p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        /* Comparison Section */
+        .comparison {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a5c7a 100%);
+            padding: 6rem 1rem;
+        }
+
+        .comparison-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .comparison-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .comparison-header p {
+            font-size: 1.125rem;
+            color: #cbd5e1;
+        }
+
+        .comparison-table {
+            background: rgba(15, 42, 66, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .comparison-table th {
+            background: rgba(16, 185, 129, 0.1);
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table td {
+            color: #cbd5e1;
+        }
+
+        .comparison-table td.feature-name {
+            color: var(--light-text);
+            font-weight: 500;
+        }
+
+        .check {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .cross {
+            color: #ef4444;
+        }
+
+        /* Security Section */
+        .security {
+            background-color: var(--dark-bg);
+            padding: 6rem 1rem;
+        }
+
+        .security .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        @media (min-width: 1024px) {
+            .security .container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .security-content h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--light-text);
+            margin-bottom: 2rem;
+        }
+
+        .security-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .security-icon {
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+            color: var(--accent);
+        }
+
+        .security-item h4 {
+            font-weight: bold;
+            color: var(--light-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .security-item p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .security-image {
+            display: none;
+        }
+
+        @media (min-width: 1024px) {
+            .security-image {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+        .security-image-card {
+            background: rgba(15, 42, 66, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .security-image-card .emoji {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .security-image-card .title {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background: linear-gradient(to bottom, var(--primary), var(--dark-bg));
+            padding: 6rem 1rem;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: linear-gradient(135deg, rgba(15, 42, 66, 0.8), rgba(16, 185, 129, 0.1));
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent);
+            transform: scale(1.05);
+            box-shadow: 0 20px 25px -5px rgba(212, 175, 55, 0.2);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -1rem;
+            left: 1.5rem;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--light-text);
+            margin-bottom: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .pricing-description {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-period {
+            color: #94a3b8;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .pricing-card button {
+            width: 100%;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a5c7a 50%, var(--secondary) 100%);
+            padding: 6rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 24rem;
+            height: 24rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            filter: blur(96px);
+            z-index: 1;
+        }
+
+        .contact::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 20rem;
+            height: 20rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            filter: blur(96px);
+            z-index: 1;
+        }
+
+        .contact .container {
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+
+        .contact-header p {
+            font-size: 1.125rem;
+            color: #cbd5e1;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 1024px) {
+            .contact-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .contact-info {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .contact-info-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .contact-info-icon {
+            width: 3rem;
+            height: 3rem;
+            background: rgba(212, 175, 55, 0.2);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .contact-info-content h3 {
+            color: var(--light-text);
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-info-content p {
+            color: #cbd5e1;
+        }
+
+        .contact-form {
+            background: rgba(15, 42, 66, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 2rem;
+            border-radius: 0.75rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--light-text);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--light-text);
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: inherit;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-input::placeholder {
+            color: rgba(248, 250, 252, 0.5);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 8rem;
+        }
+
+        .contact-form button {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .form-message {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid var(--secondary);
+            color: var(--secondary-light);
+            display: block;
+        }
+
+        .form-message.error {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+            color: #fca5a5;
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(180deg, var(--primary), var(--dark-bg));
+            padding: 3rem 1rem;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        footer .container {
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        footer .social-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        footer .social-links a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">💰 Money Control Pro</div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+            <div class="nav-links" id="navLinks">
+                <a href="#ai-brain">AI Brain</a>
+                <a href="#features">Features</a>
+                <a href="#pfos">PFOS 2050</a>
+                <a href="#advanced">Advanced</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div>
+                        <span class="badge">THE FUTURE OF PERSONAL FINANCE</span>
+                        <h1>Your Money.<br><span class="accent">Finally Understood.</span></h1>
+                        <p>PFOS 2050 - Personal Financial Operating System powered by AI. Not just an app, a financial
+                            life operating system that understands your psychology, predicts your future, and optimizes
+                            every decision.</p>
+                        <div class="hero-buttons">
+                            <button class="btn-primary" onclick="window.location.href='demo.html'">
+                                🚀 Start Free Trial
+                            </button>
+                            <button class="btn-secondary">📺 Watch Demo</button>
+                        </div>
+                        <div class="hero-stats">
+                            <div>
+                                <div class="hero-stat-number">50K+</div>
+                                <div class="hero-stat-label">Happy Users</div>
+                            </div>
+                            <div>
+                                <div class="hero-stat-number">₹500Cr+</div>
+                                <div class="hero-stat-label">Tracked</div>
+                            </div>
+                            <div>
+                                <div class="hero-stat-number">4.8★</div>
+                                <div class="hero-stat-label">Rating</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <div class="hero-image-card">
+                            <div class="emoji">📊</div>
+                            <p class="title">PFOS 2050 - Dashboard Preview</p>
+                            <p class="subtitle">Real-time financial overview at your fingertips</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number">₹0</div>
+                    <div class="stat-label">Hidden Fees</div>
+                    <div class="stat-sublabel">Completely transparent</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">AI Brain Active</div>
+                    <div class="stat-sublabel">Always working for you</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">256-bit</div>
+                    <div class="stat-label">Bank Security</div>
+                    <div class="stat-sublabel">Military encryption</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Local Data</div>
+                    <div class="stat-sublabel">Your control</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Financial Brain Section -->
+        <section id="ai-brain" class="ai-brain">
+            <div class="container">
+                <div class="ai-brain-header">
+                    <h2>🤖 AI Financial Brain (Core USP)</h2>
+                    <p>Your personal financial AI advisor that understands you better than any human. Chat with an AI
+                        that knows your patterns, predicts your future, and guides every money decision.</p>
+                </div>
+
+                <div class="ai-brain-content">
+                    <div class="ai-brain-demo">
+                        <div style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;">Financial Brain Chat</div>
+                        <div class="chat-message bot">
+                            <strong>Brain:</strong> "Good morning! I analyzed your last 30 days. You're overspending on
+                            food by 32% (₹8,450 vs budget)."
+                        </div>
+                        <div class="chat-message user">
+                            "Why is that happening?"
+                        </div>
+                        <div class="chat-message bot">
+                            <strong>Brain:</strong> "Pattern detected: You overspend weekends & after work stress. My
+                            suggestion: Meal prep on Sundays, save ₹25,000/month."
+                        </div>
+                        <div class="chat-message user">
+                            "When will I reach ₹10L savings?"
+                        </div>
+                        <div class="chat-message bot">
+                            <strong>Brain:</strong> "At current pace: 24 months. If you implement my suggestions: 18
+                            months. I can automate 30% of your savings."
+                        </div>
+                    </div>
+
+                    <div class="ai-brain-features">
+                        <div class="ai-feature">
+                            <h3>💬 Smart AI Advisor</h3>
+                            <p>Chat with Claude-powered AI that understands your financial goals, behavior patterns, and
+                                life situation. Get personalized advice, not generic tips.</p>
+                        </div>
+                        <div class="ai-feature">
+                            <h3>📊 Spending Analysis</h3>
+                            <p>"You're overspending on food by 32%" - AI detects patterns others miss. Weekly insights
+                                on where money leaks happen.</p>
+                        </div>
+                        <div class="ai-feature">
+                            <h3>🔮 Future Prediction</h3>
+                            <p>AI predicts: when you'll hit savings goals, burnout risk, lifestyle creep, and optimal
+                                time for major life decisions.</p>
+                        </div>
+                        <div class="ai-feature">
+                            <h3>🎯 Goal Suggestions</h3>
+                            <p>AI automatically suggests realistic financial goals based on your income, expenses, and
+                                life situation.</p>
+                        </div>
+                        <div class="ai-feature">
+                            <h3>🧠 Behavioral Learning</h3>
+                            <p>The more you use it, the smarter it gets. AI learns your habits, preferences, and
+                                decision patterns.</p>
+                        </div>
+                        <div class="ai-feature">
+                            <h3>🎙️ Voice Commands</h3>
+                            <p>"How much did I spend this month?" "When will I reach my goal?" AI understands natural
+                                language.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Social Proof - Real Outcomes Section -->
+        <section id="proof" class="social-proof">
+            <div class="proof-header">
+                <h2>Real Indians. Real Results. Real Money.</h2>
+                <p>Not vague testimonials. Hard numbers from actual users.</p>
+            </div>
+            <div class="proof-grid">
+                <div class="proof-card animate">
+                    <div class="proof-stat">18 months → 12 months</div>
+                    <div class="proof-title">Priya Singh (Software Engineer)</div>
+                    <div class="proof-desc">"AI told me I was 'splurging on food by 32%'. Adjusted my eating, reached
+                        ₹10L savings goal 6 months early. Game changer."</div>
+                </div>
+                <div class="proof-card animate delay-1">
+                    <div class="proof-stat">32% savings increase</div>
+                    <div class="proof-title">Rahul Verma (Business Owner)</div>
+                    <div class="proof-desc">"PFOS caught expenses I didn't even know existed. ₹85K/month in
+                        subscriptions I forgot about. Paid for itself in week one."</div>
+                </div>
+                <div class="proof-card animate delay-2">
+                    <div class="proof-stat">₹45L portfolio value</div>
+                    <div class="proof-title">Anjali Patel (Investments)</div>
+                    <div class="proof-desc">"Time Machine Simulator showed me my startup path would burn me out at 34.
+                        Changed trajectory entirely. Best decision ever."</div>
+                </div>
+                <div class="proof-card animate">
+                    <div class="proof-stat">0 → ₹3L emergency fund</div>
+                    <div class="proof-title">Akash Kumar (Freelancer)</div>
+                    <div class="proof-desc">"AI built my emergency fund plan. 8 months in. Feels secure for the first
+                        time. No more panic attacks."</div>
+                </div>
+                <div class="proof-card animate delay-1">
+                    <div class="proof-stat">₹12K/month extra in hand</div>
+                    <div class="proof-title">Neha Desai (Teacher)</div>
+                    <div class="proof-desc">"Found hidden optimization in salary tax. AI suggested 80C deductions I
+                        didn't know existed. ₹1.4L back from CA filing."</div>
+                </div>
+                <div class="proof-card animate delay-2">
+                    <div class="proof-stat">Made first investment</div>
+                    <div class="proof-title">Vikram Singh (Beginner)</div>
+                    <div class="proof-desc">"Terrified of investing. AI explained everything in Hindi. ₹50K invested in
+                        SIP. Sleep soundly now knowing it's working."</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Problem Section -->
+        <section class="problem-section">
+            <div class="problem-container">
+                <div class="problem-header">
+                    <h2>The Real Problem Nobody Talks About</h2>
+                    <p>It's not about having less money. It's about making terrible decisions with the money you have.
+                    </p>
+                </div>
+                <div class="problems-grid">
+                    <div class="problem-card animate">
+                        <div class="problem-icon">🤔</div>
+                        <div class="problem-title">You Don't Know What You Don't Know</div>
+                        <div class="problem-desc">Average Indian wastes ₹2-3L/year on subscriptions they forgot about.
+                            Netflix, Spotify, Gym memberships... gone but still charging.</div>
+                    </div>
+                    <div class="problem-card animate delay-1">
+                        <div class="problem-icon">📉</div>
+                        <div class="problem-title">Emotions Destroy Wealth</div>
+                        <div class="problem-desc">Market crashes? You panic sell. Friend gets rich in crypto? You FOMO
+                            buy. Cortisol > Math. Every time.</div>
+                    </div>
+                    <div class="problem-card animate delay-2">
+                        <div class="problem-icon">⏰</div>
+                        <div class="problem-title">Time Is Money (Literally)</div>
+                        <div class="problem-desc">By the time you reach 40, ₹3.2L went to wrong tax filings, ₹2.1L to
+                            bad investments. Your future self is angry.</div>
+                    </div>
+                    <div class="problem-card animate">
+                        <div class="problem-icon">📊</div>
+                        <div class="problem-title">You Have No Plan</div>
+                        <div class="problem-desc">"Save more" isn't a plan. Without clarity on exactly when you'll reach
+                            ₹10L or retire, every financial decision is a guess.</div>
+                    </div>
+                    <div class="problem-card animate delay-1">
+                        <div class="problem-icon">👨‍💼</div>
+                        <div class="problem-title">Advisors Are Expensive (Or Biased)</div>
+                        <div class="problem-desc">Good advisors cost ₹5-50K/month. Bad ones push products that earn them
+                            commission. AI? Always on your side.</div>
+                    </div>
+                    <div class="problem-card animate delay-2">
+                        <div class="problem-icon">🔐</div>
+                        <div class="problem-title">Your Habits Sabotage You</div>
+                        <div class="problem-desc">You overspend when stressed, panic-invest after gains, avoid hard
+                            money talks. No one tracks these patterns... until now.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="features-header">
+                    <span class="badge">CORE FEATURES</span>
+                    <h2 class="section-title">Everything You Need Today</h2>
+                    <p>From manual tracking to fully intelligent automation. All features build on our AI foundation.
+                    </p>
+                </div>
+
+                <div class="features-grid">
+                    <!-- Bank Integration -->
+                    <div class="feature-card">
+                        <div class="feature-icon">🏦</div>
+                        <h3>Bank & Transaction Integration</h3>
+                        <p>From manual to automatic. Connect your bank accounts or import statements with AI
+                            auto-categorization.</p>
+                        <ul class="feature-list">
+                            <li>📥 Bank statement import (PDF/CSV)</li>
+                            <li>🔗 Direct bank API integration</li>
+                            <li>📱 UPI transaction tracking</li>
+                            <li>🏢 Multi-bank dashboard</li>
+                            <li>🤖 Auto categorization (AI)</li>
+                            <li>🔔 Subscription detection</li>
+                        </ul>
+                    </div>
+
+                    <!-- Advanced Dashboard -->
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Bloomberg-Level Dashboard</h3>
+                        <p>Real-time financial overview that feels like a Bloomberg terminal for your life.</p>
+                        <ul class="feature-list">
+                            <li>📈 Net worth tracker (real-time)</li>
+                            <li>📉 Income vs expense graph</li>
+                            <li>🧾 Category breakdown heatmaps</li>
+                            <li>🔄 Monthly comparisons</li>
+                            <li>💚 Financial health score</li>
+                            <li>💰 Cash flow forecast</li>
+                        </ul>
+                    </div>
+
+                    <!-- Goals & Life Planning -->
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Goals + Life Planning</h3>
+                        <p>Set dreams, AI transforms them into actionable plans with real timelines and costs.</p>
+                        <ul class="feature-list">
+                            <li>🎓 Education fund planning</li>
+                            <li>🚗 Car purchase timeline</li>
+                            <li>🏠 House planning (₹30L, 5 years)</li>
+                            <li>✈️ Travel goals budget</li>
+                            <li>📊 AI timeline prediction</li>
+                            <li>🔄 Auto plan adjustment</li>
+                        </ul>
+                    </div>
+
+                    <!-- Investment Hub -->
+                    <div class="feature-card">
+                        <div class="feature-icon">💹</div>
+                        <h3>Investment Hub (India Focus)</h3>
+                        <p>Track stocks, crypto, mutual funds. AI suggests diversification and risks.</p>
+                        <ul class="feature-list">
+                            <li>📊 Stocks tracking</li>
+                            <li>🪙 Crypto portfolio</li>
+                            <li>📈 Mutual funds SIP</li>
+                            <li>⚖️ Portfolio diversification</li>
+                            <li>🤖 AI recommendations</li>
+                            <li>📊 Risk analysis score</li>
+                        </ul>
+                    </div>
+
+                    <!-- Tax & Compliance -->
+                    <div class="feature-card">
+                        <div class="feature-icon">🧾</div>
+                        <h3>Tax & Compliance (India)</h3>
+                        <p>Auto-calculate taxes, suggest deductions. Generate reports for your CA.</p>
+                        <ul class="feature-list">
+                            <li>📄 Income tax estimation</li>
+                            <li>💸 Deduction suggestions (80C, etc.)</li>
+                            <li>📊 Tax-saving tips</li>
+                            <li>📈 Automated ITR filing</li>
+                            <li>🧮 GST support (business)</li>
+                            <li>📑 CA report generation</li>
+                        </ul>
+                    </div>
+
+                    <!-- Community & Gamification -->
+                    <div class="feature-card">
+                        <div class="feature-icon">🏆</div>
+                        <h3>Gamification & Community</h3>
+                        <p>Make saving fun. Compete with friends, earn badges, join financial communities.</p>
+                        <ul class="feature-list">
+                            <li>💡 Financial tips feed</li>
+                            <li>👥 Community discussions</li>
+                            <li>🏆 Savings leaderboard</li>
+                            <li>🎖️ Achievement badges</li>
+                            <li>👫 Refer & earn rewards</li>
+                            <li>📊 Weekly challenges</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PFOS 2050 Section -->
+        <section id="pfos" class="pfos-section">
+            <div class="container">
+                <div class="pfos-header">
+                    <h2>🧬 PFOS 2050: Personal Financial Operating System</h2>
+                    <p>"Money is just a proxy. Optimize for life outcomes, not just wealth."</p>
+                </div>
+
+                <div class="pfos-grid">
+                    <!-- Financial DNA Score -->
+                    <div class="pfos-card">
+                        <div class="pfos-card-title">🧬 Financial DNA Score</div>
+                        <p class="pfos-card-desc">A living behavioral model that evolves with you. Score 0-1000 based on
+                            actual behavior.</p>
+                        <ul class="pfos-card-features">
+                            <li>🔥 Aggressive Builder</li>
+                            <li>🛡️ Security Seeker</li>
+                            <li>🌊 Lifestyle Optimizer</li>
+                            <li>🎲 Risk-Taker</li>
+                            <li>📊 Updates weekly</li>
+                        </ul>
+                    </div>
+
+                    <!-- Time Machine Simulator -->
+                    <div class="pfos-card">
+                        <div class="pfos-card-title">⏳ Time Machine Simulator</div>
+                        <p class="pfos-card-desc">Simulate multiple life timelines. See which path leads to happiness,
+                            wealth, and freedom.</p>
+                        <ul class="pfos-card-features">
+                            <li>🚀 Startup Founder Path</li>
+                            <li>💼 Corporate Climber Path</li>
+                            <li>🌎 Minimalist Nomad Path</li>
+                            <li>📊 Stress vs wealth tradeoff</li>
+                            <li>😊 Happiness probability</li>
+                        </ul>
+                    </div>
+
+                    <!-- FIRE Calculator 3.0 -->
+                    <div class="pfos-card">
+                        <div class="pfos-card-title">🔥 FIRE Calculator 3.0</div>
+                        <p class="pfos-card-desc">Dynamic life simulation, not static numbers. Includes burnout risk and
+                            lifestyle creep.</p>
+                        <ul class="pfos-card-features">
+                            <li>📈 Income volatility modeling</li>
+                            <li>⚠️ Burnout probability</li>
+                            <li>💸 Lifestyle creep detection</li>
+                            <li>💊 Health cost modeling</li>
+                            <li>✅ Coast FIRE timeline</li>
+                        </ul>
+                    </div>
+
+                    <!-- Future Self Chat -->
+                    <div class="pfos-card">
+                        <div class="pfos-card-title">👤 Future Self Chat</div>
+                        <p class="pfos-card-desc">Talk to "you" in 2040. Get emotional clarity on major life decisions.
+                        </p>
+                        <ul class="pfos-card-features">
+                            <li>🧠 Personality evolution</li>
+                            <li>⚖️ Trade-off insights</li>
+                            <li>😕 Regret probability</li>
+                            <li>💭 Emotional clarity</li>
+                            <li>🎯 Decision guidance</li>
+                        </ul>
+                    </div>
+
+                    <!-- Regret Minimizer -->
+                    <div class="pfos-card">
+                        <div class="pfos-card-title">⚠️ Regret Minimizer</div>
+                        <p class="pfos-card-desc">Compare life decisions. Choose Option A = 65% regret. Choose Option B
+                            = 20% regret.</p>
+                        <ul class="pfos-card-features">
+                            <li>📊 Opportunity cost analysis</li>
+                            <li>🎯 Personal values alignment</li>
+                            <li>📈 Risk tolerance match</li>
+                            <li>⏳ Time-cost visualization</li>
+                            <li>🔄 Decision automation</li>
+                        </ul>
+                    </div>
+
+                    <!-- Life Alignment Score -->
+                    <div class="pfos-card">
+                        <div class="pfos-card-title">⚖️ Life Alignment Score</div>
+                        <p class="pfos-card-desc">Detects contradictions. "Wants freedom but works 80 hrs/week" = 25%
+                            aligned.</p>
+                        <ul class="pfos-card-features">
+                            <li>🧠 Goal contradiction detector</li>
+                            <li>📊 Values alignment score</li>
+                            <li>🔄 Identity drift tracker</li>
+                            <li>⏰ Opportunity radar</li>
+                            <li>💚 Wellness monitoring</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced & Future Features -->
+        <section id="advanced" class="advanced">
+            <div class="container">
+                <div class="advanced-header">
+                    <span class="badge">NEXT-LEVEL FEATURES</span>
+                    <h2 class="section-title">God-Tier Features</h2>
+                    <p>These features make us different from every competitor</p>
+                </div>
+
+                <div class="advanced-grid">
+                    <div class="advanced-card">
+                        <div class="advanced-emoji">🧠</div>
+                        <h3>Financial Health Score</h3>
+                        <p>Like CIBIL but for your entire life. Tracks income stability, debt patterns, emergency fund,
+                            and financial wellness.</p>
+                    </div>
+
+                    <div class="advanced-card">
+                        <div class="advanced-emoji">🤖</div>
+                        <h3>AI Auto-Invest</h3>
+                        <p>Like a robo advisor but smarter. Auto-invests surplus money based on your goals and risk
+                            profile.</p>
+                    </div>
+
+                    <div class="advanced-card">
+                        <div class="advanced-emoji">💡</div>
+                        <h3>Smart Alerts</h3>
+                        <p>"You can save ₹12,000 this month by cutting 3 subscriptions" - Context-aware nudges that
+                            work.</p>
+                    </div>
+
+                    <div class="advanced-card">
+                        <div class="advanced-emoji">📊</div>
+                        <h3>Energy → Money Tracker</h3>
+                        <p>Track work hours vs earnings. "You earn ₹800/hr but lose mental energy = unsustainable."</p>
+                    </div>
+
+                    <div class="advanced-card">
+                        <div class="advanced-emoji">🎮</div>
+                        <h3>Gamified Dashboard</h3>
+                        <p>Replaces money obsession with Freedom Score, Time Ownership, and Stress vs Wealth Balance.
+                        </p>
+                    </div>
+
+                    <div class="advanced-card">
+                        <div class="advanced-emoji">📈</div>
+                        <h3>"Where Rich People Invest"</h3>
+                        <p>See investment patterns of people who reached financial freedom. Learn from their playbook.
+                        </p>
+                    </div>
+
+                    <div class="advanced-card">
+                        <div class="advanced-emoji">🔍</div>
+                        <h3>Blind Spot Detector</h3>
+                        <p>"Your salary is 40% below market" - Detects career stagnation, skill irrelevance,
+                            under-investment.</p>
+                    </div>
+
+                    <div class="advanced-card">
+                        <div class="advanced-emoji">👤</div>
+                        <h3>Financial Twin (AI Clone)</h3>
+                        <p>Test strategies before real execution. "What if I quit my job?" - AI simulates the outcome.
+                        </p>
+                    </div>
+
+                    <div class="advanced-card">
+                        <div class="advanced-emoji">📡</div>
+                        <h3>Opportunity Radar</h3>
+                        <p>Real-time alerts: job switch timing, market opportunities, in-demand skills, salary
+                            increases.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section class="comparison">
+            <div class="container">
+                <div class="comparison-header">
+                    <h2>How We Compare</h2>
+                    <p>We're not competing with Moneycontrol or Zerodha. We're competing with "How humans make life
+                        decisions"</p>
+                </div>
+
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Money Control Pro</th>
+                                <th>Traditional Apps</th>
+                                <th>Advisors</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="feature-name">AI Financial Brain</td>
+                                <td class="check">✓</td>
+                                <td>✗</td>
+                                <td>Limited</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Life Simulation (PFOS)</td>
+                                <td class="check">✓</td>
+                                <td>✗</td>
+                                <td>✗</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Future Self Chat</td>
+                                <td class="check">✓</td>
+                                <td>✗</td>
+                                <td>✗</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Auto Bank Integration</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td>Manual</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Tax Optimization (India)</td>
+                                <td class="check">✓</td>
+                                <td>Limited</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Investment Tracking</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td>✗</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Cost</td>
+                                <td>₹299-999/mo</td>
+                                <td>₹0-500/mo</td>
+                                <td>₹5000-50K/mo</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Available 24/7</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td>✗</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security Section -->
+        <section class="security">
+            <div class="container">
+                <div class="security-content">
+                    <span class="badge">MILITARY-GRADE SECURITY</span>
+                    <h2>Your Data = Your Life</h2>
+
+                    <div class="security-item">
+                        <div class="security-icon">✓</div>
+                        <div>
+                            <h4>256-bit AES Encryption</h4>
+                            <p>Same encryption banks use. Your data travels safely across the internet.</p>
+                        </div>
+                    </div>
+
+                    <div class="security-item">
+                        <div class="security-icon">✓</div>
+                        <div>
+                            <h4>Offline-First Architecture</h4>
+                            <p>Works without internet. Your data never has to leave your device unless you choose.</p>
+                        </div>
+                    </div>
+
+                    <div class="security-item">
+                        <div class="security-icon">✓</div>
+                        <div>
+                            <h4>Biometric Authentication</h4>
+                            <p>Fingerprint & Face ID support for maximum security and convenience.</p>
+                        </div>
+                    </div>
+
+                    <div class="security-item">
+                        <div class="security-icon">✓</div>
+                        <div>
+                            <h4>Zero-Knowledge Architecture</h4>
+                            <p>We can't see your data. End-to-end encrypted even from our own servers.</p>
+                        </div>
+                    </div>
+
+                    <div class="security-item">
+                        <div class="security-icon">✓</div>
+                        <div>
+                            <h4>Regular Security Audits</h4>
+                            <p>Third-party security experts verify our systems quarterly. No compromises.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="security-image">
+                    <div class="security-image-card">
+                        <div class="emoji">🔒</div>
+                        <p class="title">Bank-Level Security</p>
+                        <p class="subtitle">Your financial data is protected</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing">
+            <div class="container">
+                <div class="pricing-header">
+                    <span class="badge">TRANSPARENT PRICING</span>
+                    <h2 class="section-title">Plans for Everyone</h2>
+                    <p>Start free. Upgrade when you're ready. Cancel anytime.</p>
+                </div>
+
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>🆓 Basic</h3>
+                        <p class="pricing-description">Getting started</p>
+                        <div class="pricing-price">₹0</div>
+                        <p class="pricing-period">Forever free</p>
+                        <ul class="pricing-features">
+                            <li>Manual expense tracking</li>
+                            <li>Basic dashboard</li>
+                            <li>Budget planning</li>
+                            <li>Mobile app</li>
+                            <li>Community access</li>
+                        </ul>
+                        <button class="btn-secondary" >Get Started</button>
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <span class="pricing-badge">MOST POPULAR</span>
+                        <h3>⭐ Pro</h3>
+                        <p class="pricing-description">For serious money managers</p>
+                        <div class="pricing-price">₹299<span style="font-size: 0.5em; color: #94a3b8;">/month</span>
+                        </div>
+                        <p class="pricing-period">Cancel anytime</p>
+                        <ul class="pricing-features">
+                            <li>Everything in Basic</li>
+                            <li>🤖 AI Financial Brain</li>
+                            <li>📊 Advanced analytics</li>
+                            <li>💹 Investment tracking</li>
+                            <li>🎯 Goal planning (AI)</li>
+                            <li>📱 Bank API integration</li>
+                            <li>Priority support</li>
+                        </ul>
+                        <button class="btn-primary">Start Free Trial (7 days)</button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <h3>👑 Premium</h3>
+                        <p class="pricing-description">Complete control</p>
+                        <div class="pricing-price">₹999<span style="font-size: 0.5em; color: #94a3b8;">/month</span>
+                        </div>
+                        <p class="pricing-period">Annual: ₹9,999</p>
+                        <ul class="pricing-features">
+                            <li>Everything in Pro</li>
+                            <li>🧬 PFOS 2050 system</li>
+                            <li>⏳ Time Machine simulator</li>
+                            <li>👤 Future Self chat</li>
+                            <li>🧾 Tax optimization (India)</li>
+                            <li>🔥 FIRE calculator 3.0</li>
+                            <li>1-on-1 coaching</li>
+                            <li>24/7 dedicated support</li>
+                        </ul>
+                        <button class="btn-secondary">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-header">
+                    <h2>Let's Build Your Financial Future</h2>
+                    <p>Questions about PFOS 2050? Our team is here to help you understand the next generation of
+                        personal finance.</p>
+                </div>
+
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">📧</div>
+                            <div class="contact-info-content">
+                                <h3>Email</h3>
+                                <p><a href="mailto:support@moneycontrolpro.com"
+                                        style="color: #cbd5e1; text-decoration: none;">support@moneycontrolpro.com</a>
+                                </p>
+                                <p style="color: #64748b; font-size: 0.875rem;">Response within 24 hours</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">📱</div>
+                            <div class="contact-info-content">
+                                <h3>Phone</h3>
+                                <p><a href="tel:+919876543210" style="color: #cbd5e1; text-decoration: none;">+91 77760
+                                        90314</a></p>
+                                <p style="color: #64748b; font-size: 0.875rem;">Mon-Fri, 9 AM - 6 PM IST</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">📍</div>
+                            <div class="contact-info-content">
+                                <h3>Address</h3>
+                                <p>Mumbai, India 🇮🇳</p>
+                                <p style="color: #64748b; font-size: 0.875rem;">Global operations coming soon</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">⏰</div>
+                            <div class="contact-info-content">
+                                <h3>Support</h3>
+                                <p>24/7 AI support + Email</p>
+                                <p style="color: #64748b; font-size: 0.875rem;">Human support Mon-Fri 9 AM-6 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="John Doe"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" class="form-input"
+                                    placeholder="john@example.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" class="form-input"
+                                    placeholder="How can we help?">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" class="form-input form-textarea"
+                                    placeholder="Tell us more about your inquiry..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-primary">Send Message 📧</button>
+                            <div id="formMessage" class="form-message"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Money Control Pro - PFOS 2050. Built with ❤️ in India 🇮🇳 for the world 🌍</p>
+            <div class="social-links">
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Instagram</a>
+                <a href="#">GitHub</a>
+            </div>
+            <p style="font-size: 0.875rem; margin-top: 1rem;">
+                <a href="#" style="color: #94a3b8; text-decoration: none;">Privacy Policy</a> •
+                <a href="#" style="color: #94a3b8; text-decoration: none;">Terms of Service</a> •
+                <a href="#" style="color: #94a3b8; text-decoration: none;">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when a link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Contact Form Handler
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value,
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                // Simulate form submission
+                console.log('Form submitted:', formData);
+
+                // Show success message
+                formMessage.textContent = '✓ Message sent successfully! We\'ll get back to you within 24 hours.';
+                formMessage.classList.remove('error');
+                formMessage.classList.add('success');
+
+                // Reset form
+                contactForm.reset();
+
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    formMessage.classList.remove('success');
+                }, 5000);
+
+            } catch (error) {
+                // Show error message
+                formMessage.textContent = '✗ Something went wrong. Please try again or contact support@moneycontrolpro.com';
+                formMessage.classList.remove('success');
+                formMessage.classList.add('error');
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .testimonial-card, .pricing-card, .pfos-card, .advanced-card, .ai-feature').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
