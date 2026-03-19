@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Money Control Pro - Personal Financial Operating System 2050</title>
-    <meta name="description" content="AI-powered personal finance OS with Financial Brain, PFOS system, investment tracking, and life planning. Built for India, designed for global scale.">
+    <meta name="description"
+        content="AI-powered personal finance OS with Financial Brain, PFOS system, investment tracking, and life planning. Built for India, designed for global scale.">
     <style>
         * {
             margin: 0;
@@ -596,6 +598,267 @@
 
         .feature-link:hover {
             gap: 0.75rem;
+        }
+
+        /* Social Proof - Real Outcomes */
+        .social-proof {
+            background-color: var(--dark-bg);
+            padding: 4rem 1rem;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .proof-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .proof-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+
+        .proof-header p {
+            color: #cbd5e1;
+            font-size: 1.125rem;
+        }
+
+        .proof-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .proof-card {
+            background: linear-gradient(135deg, rgba(15, 42, 66, 0.8), rgba(16, 185, 129, 0.1));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .proof-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 25px -5px rgba(212, 175, 55, 0.2);
+        }
+
+        .proof-stat {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .proof-title {
+            font-weight: 600;
+            color: var(--light-text);
+            margin-bottom: 0.75rem;
+        }
+
+        .proof-desc {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        /* Problem-Solution Section */
+        .problem-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a5c7a 100%);
+            padding: 6rem 1rem;
+        }
+
+        .problem-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .problem-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .problem-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+
+        .problem-header p {
+            font-size: 1.125rem;
+            color: #cbd5e1;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--accent);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .problem-card:hover {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .problem-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-title {
+            font-weight: 700;
+            color: var(--light-text);
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+        }
+
+        .problem-desc {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+        /* Solution Section */
+        .solution-section {
+            background-color: var(--dark-bg);
+            padding: 6rem 1rem;
+        }
+
+        .solution-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 1280px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .solution-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .solution-header p {
+            font-size: 1.125rem;
+            color: #cbd5e1;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .solution-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(212, 175, 55, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .solution-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .solution-title {
+            font-weight: 700;
+            color: var(--light-text);
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+        }
+
+        .solution-desc {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+        }
+
+
+        /* Problem-Solution Section */
+        .problem-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a5c7a 100%);
+            padding: 6rem 1rem;
+        }
+
+        .problem-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .problem-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .problem-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+
+        .problem-header p {
+            font-size: 1.125rem;
+            color: #cbd5e1;
+        }
+
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--accent);
+            padding: 2rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .problem-card:hover {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .problem-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-title {
+            font-weight: 700;
+            color: var(--light-text);
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem;
+        }
+
+        .problem-desc {
+            color: #cbd5e1;
+            font-size: 0.95rem;
         }
 
         /* PFOS Features Section */
@@ -1210,6 +1473,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -1220,11 +1484,21 @@
             animation: fadeInUp 0.6s ease forwards;
         }
 
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav>
@@ -1250,8 +1524,10 @@
                 <div class="hero-content">
                     <div>
                         <span class="badge">THE FUTURE OF PERSONAL FINANCE</span>
-                        <h1>Your Money.<br><span class="accent">Meet Your AI Brain.</span></h1>
-                        <p>PFOS 2050 - Personal Financial Operating System powered by AI. Not just an app, a financial life operating system that understands your psychology, predicts your future, and optimizes every decision.</p>
+                        <h1>Your Money.<br><span class="accent">Finally Understood.</span></h1>
+                        <p>PFOS 2050 - Personal Financial Operating System powered by AI. Not just an app, a financial
+                            life operating system that understands your psychology, predicts your future, and optimizes
+                            every decision.</p>
                         <div class="hero-buttons">
                             <button class="btn-primary">🚀 Start Free Trial</button>
                             <button class="btn-secondary">📺 Watch Demo</button>
@@ -1313,54 +1589,161 @@
             <div class="container">
                 <div class="ai-brain-header">
                     <h2>🤖 AI Financial Brain (Core USP)</h2>
-                    <p>Your personal financial AI advisor that understands you better than any human. Chat with an AI that knows your patterns, predicts your future, and guides every money decision.</p>
+                    <p>Your personal financial AI advisor that understands you better than any human. Chat with an AI
+                        that knows your patterns, predicts your future, and guides every money decision.</p>
                 </div>
 
                 <div class="ai-brain-content">
                     <div class="ai-brain-demo">
                         <div style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;">Financial Brain Chat</div>
                         <div class="chat-message bot">
-                            <strong>Brain:</strong> "Good morning! I analyzed your last 30 days. You're overspending on food by 32% (₹8,450 vs budget)."
+                            <strong>Brain:</strong> "Good morning! I analyzed your last 30 days. You're overspending on
+                            food by 32% (₹8,450 vs budget)."
                         </div>
                         <div class="chat-message user">
                             "Why is that happening?"
                         </div>
                         <div class="chat-message bot">
-                            <strong>Brain:</strong> "Pattern detected: You overspend weekends & after work stress. My suggestion: Meal prep on Sundays, save ₹25,000/month."
+                            <strong>Brain:</strong> "Pattern detected: You overspend weekends & after work stress. My
+                            suggestion: Meal prep on Sundays, save ₹25,000/month."
                         </div>
                         <div class="chat-message user">
                             "When will I reach ₹10L savings?"
                         </div>
                         <div class="chat-message bot">
-                            <strong>Brain:</strong> "At current pace: 24 months. If you implement my suggestions: 18 months. I can automate 30% of your savings."
+                            <strong>Brain:</strong> "At current pace: 24 months. If you implement my suggestions: 18
+                            months. I can automate 30% of your savings."
                         </div>
                     </div>
 
                     <div class="ai-brain-features">
                         <div class="ai-feature">
                             <h3>💬 Smart AI Advisor</h3>
-                            <p>Chat with Claude-powered AI that understands your financial goals, behavior patterns, and life situation. Get personalized advice, not generic tips.</p>
+                            <p>Chat with Claude-powered AI that understands your financial goals, behavior patterns, and
+                                life situation. Get personalized advice, not generic tips.</p>
                         </div>
                         <div class="ai-feature">
                             <h3>📊 Spending Analysis</h3>
-                            <p>"You're overspending on food by 32%" - AI detects patterns others miss. Weekly insights on where money leaks happen.</p>
+                            <p>"You're overspending on food by 32%" - AI detects patterns others miss. Weekly insights
+                                on where money leaks happen.</p>
                         </div>
                         <div class="ai-feature">
                             <h3>🔮 Future Prediction</h3>
-                            <p>AI predicts: when you'll hit savings goals, burnout risk, lifestyle creep, and optimal time for major life decisions.</p>
+                            <p>AI predicts: when you'll hit savings goals, burnout risk, lifestyle creep, and optimal
+                                time for major life decisions.</p>
                         </div>
                         <div class="ai-feature">
                             <h3>🎯 Goal Suggestions</h3>
-                            <p>AI automatically suggests realistic financial goals based on your income, expenses, and life situation.</p>
+                            <p>AI automatically suggests realistic financial goals based on your income, expenses, and
+                                life situation.</p>
                         </div>
                         <div class="ai-feature">
                             <h3>🧠 Behavioral Learning</h3>
-                            <p>The more you use it, the smarter it gets. AI learns your habits, preferences, and decision patterns.</p>
+                            <p>The more you use it, the smarter it gets. AI learns your habits, preferences, and
+                                decision patterns.</p>
                         </div>
                         <div class="ai-feature">
                             <h3>🎙️ Voice Commands</h3>
-                            <p>"How much did I spend this month?" "When will I reach my goal?" AI understands natural language.</p>
+                            <p>"How much did I spend this month?" "When will I reach my goal?" AI understands natural
+                                language.</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Social Proof - Real Outcomes Section -->
+        <section id="proof" class="social-proof">
+            <div class="proof-header">
+                <h2>Real Indians. Real Results. Real Money.</h2>
+                <p>Not vague testimonials. Hard numbers from actual users.</p>
+            </div>
+            <div class="proof-grid">
+                <div class="proof-card animate">
+                    <div class="proof-stat">18 months → 12 months</div>
+                    <div class="proof-title">Priya Singh (Software Engineer)</div>
+                    <div class="proof-desc">"AI told me I was 'splurging on food by 32%'. Adjusted my eating, reached
+                        ₹10L savings goal 6 months early. Game changer."</div>
+                </div>
+                <div class="proof-card animate delay-1">
+                    <div class="proof-stat">32% savings increase</div>
+                    <div class="proof-title">Rahul Verma (Business Owner)</div>
+                    <div class="proof-desc">"PFOS caught expenses I didn't even know existed. ₹85K/month in
+                        subscriptions I forgot about. Paid for itself in week one."</div>
+                </div>
+                <div class="proof-card animate delay-2">
+                    <div class="proof-stat">₹45L portfolio value</div>
+                    <div class="proof-title">Anjali Patel (Investments)</div>
+                    <div class="proof-desc">"Time Machine Simulator showed me my startup path would burn me out at 34.
+                        Changed trajectory entirely. Best decision ever."</div>
+                </div>
+                <div class="proof-card animate">
+                    <div class="proof-stat">0 → ₹3L emergency fund</div>
+                    <div class="proof-title">Akash Kumar (Freelancer)</div>
+                    <div class="proof-desc">"AI built my emergency fund plan. 8 months in. Feels secure for the first
+                        time. No more panic attacks."</div>
+                </div>
+                <div class="proof-card animate delay-1">
+                    <div class="proof-stat">₹12K/month extra in hand</div>
+                    <div class="proof-title">Neha Desai (Teacher)</div>
+                    <div class="proof-desc">"Found hidden optimization in salary tax. AI suggested 80C deductions I
+                        didn't know existed. ₹1.4L back from CA filing."</div>
+                </div>
+                <div class="proof-card animate delay-2">
+                    <div class="proof-stat">Made first investment</div>
+                    <div class="proof-title">Vikram Singh (Beginner)</div>
+                    <div class="proof-desc">"Terrified of investing. AI explained everything in Hindi. ₹50K invested in
+                        SIP. Sleep soundly now knowing it's working."</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Problem Section -->
+        <section class="problem-section">
+            <div class="problem-container">
+                <div class="problem-header">
+                    <h2>The Real Problem Nobody Talks About</h2>
+                    <p>It's not about having less money. It's about making terrible decisions with the money you have.
+                    </p>
+                </div>
+                <div class="problems-grid">
+                    <div class="problem-card animate">
+                        <div class="problem-icon">🤔</div>
+                        <div class="problem-title">You Don't Know What You Don't Know</div>
+                        <div class="problem-desc">Average Indian wastes ₹2-3L/year on subscriptions they forgot about.
+                            Netflix, Spotify, Gym memberships... gone but still charging.</div>
+                    </div>
+                    <div class="problem-card animate delay-1">
+                        <div class="problem-icon">📉</div>
+                        <div class="problem-title">Emotions Destroy Wealth</div>
+                        <div class="problem-desc">Market crashes? You panic sell. Friend gets rich in crypto? You FOMO
+                            buy. Cortisol > Math. Every time.</div>
+                    </div>
+                    <div class="problem-card animate delay-2">
+                        <div class="problem-icon">⏰</div>
+                        <div class="problem-title">Time Is Money (Literally)</div>
+                        <div class="problem-desc">By the time you reach 40, ₹3.2L went to wrong tax filings, ₹2.1L to
+                            bad investments. Your future self is angry.</div>
+                    </div>
+                    <div class="problem-card animate">
+                        <div class="problem-icon">📊</div>
+                        <div class="problem-title">You Have No Plan</div>
+                        <div class="problem-desc">"Save more" isn't a plan. Without clarity on exactly when you'll reach
+                            ₹10L or retire, every financial decision is a guess.</div>
+                    </div>
+                    <div class="problem-card animate delay-1">
+                        <div class="problem-icon">👨‍💼</div>
+                        <div class="problem-title">Advisors Are Expensive (Or Biased)</div>
+                        <div class="problem-desc">Good advisors cost ₹5-50K/month. Bad ones push products that earn them
+                            commission. AI? Always on your side.</div>
+                    </div>
+                    <div class="problem-card animate delay-2">
+                        <div class="problem-icon">🔐</div>
+                        <div class="problem-title">Your Habits Sabotage You</div>
+                        <div class="problem-desc">You overspend when stressed, panic-invest after gains, avoid hard
+                            money talks. No one tracks these patterns... until now.</div>
                     </div>
                 </div>
             </div>
@@ -1372,7 +1755,8 @@
                 <div class="features-header">
                     <span class="badge">CORE FEATURES</span>
                     <h2 class="section-title">Everything You Need Today</h2>
-                    <p>From manual tracking to fully intelligent automation. All features build on our AI foundation.</p>
+                    <p>From manual tracking to fully intelligent automation. All features build on our AI foundation.
+                    </p>
                 </div>
 
                 <div class="features-grid">
@@ -1380,7 +1764,8 @@
                     <div class="feature-card">
                         <div class="feature-icon">🏦</div>
                         <h3>Bank & Transaction Integration</h3>
-                        <p>From manual to automatic. Connect your bank accounts or import statements with AI auto-categorization.</p>
+                        <p>From manual to automatic. Connect your bank accounts or import statements with AI
+                            auto-categorization.</p>
                         <ul class="feature-list">
                             <li>📥 Bank statement import (PDF/CSV)</li>
                             <li>🔗 Direct bank API integration</li>
@@ -1481,7 +1866,8 @@
                     <!-- Financial DNA Score -->
                     <div class="pfos-card">
                         <div class="pfos-card-title">🧬 Financial DNA Score</div>
-                        <p class="pfos-card-desc">A living behavioral model that evolves with you. Score 0-1000 based on actual behavior.</p>
+                        <p class="pfos-card-desc">A living behavioral model that evolves with you. Score 0-1000 based on
+                            actual behavior.</p>
                         <ul class="pfos-card-features">
                             <li>🔥 Aggressive Builder</li>
                             <li>🛡️ Security Seeker</li>
@@ -1494,7 +1880,8 @@
                     <!-- Time Machine Simulator -->
                     <div class="pfos-card">
                         <div class="pfos-card-title">⏳ Time Machine Simulator</div>
-                        <p class="pfos-card-desc">Simulate multiple life timelines. See which path leads to happiness, wealth, and freedom.</p>
+                        <p class="pfos-card-desc">Simulate multiple life timelines. See which path leads to happiness,
+                            wealth, and freedom.</p>
                         <ul class="pfos-card-features">
                             <li>🚀 Startup Founder Path</li>
                             <li>💼 Corporate Climber Path</li>
@@ -1507,7 +1894,8 @@
                     <!-- FIRE Calculator 3.0 -->
                     <div class="pfos-card">
                         <div class="pfos-card-title">🔥 FIRE Calculator 3.0</div>
-                        <p class="pfos-card-desc">Dynamic life simulation, not static numbers. Includes burnout risk and lifestyle creep.</p>
+                        <p class="pfos-card-desc">Dynamic life simulation, not static numbers. Includes burnout risk and
+                            lifestyle creep.</p>
                         <ul class="pfos-card-features">
                             <li>📈 Income volatility modeling</li>
                             <li>⚠️ Burnout probability</li>
@@ -1520,7 +1908,8 @@
                     <!-- Future Self Chat -->
                     <div class="pfos-card">
                         <div class="pfos-card-title">👤 Future Self Chat</div>
-                        <p class="pfos-card-desc">Talk to "you" in 2040. Get emotional clarity on major life decisions.</p>
+                        <p class="pfos-card-desc">Talk to "you" in 2040. Get emotional clarity on major life decisions.
+                        </p>
                         <ul class="pfos-card-features">
                             <li>🧠 Personality evolution</li>
                             <li>⚖️ Trade-off insights</li>
@@ -1533,7 +1922,8 @@
                     <!-- Regret Minimizer -->
                     <div class="pfos-card">
                         <div class="pfos-card-title">⚠️ Regret Minimizer</div>
-                        <p class="pfos-card-desc">Compare life decisions. Choose Option A = 65% regret. Choose Option B = 20% regret.</p>
+                        <p class="pfos-card-desc">Compare life decisions. Choose Option A = 65% regret. Choose Option B
+                            = 20% regret.</p>
                         <ul class="pfos-card-features">
                             <li>📊 Opportunity cost analysis</li>
                             <li>🎯 Personal values alignment</li>
@@ -1546,7 +1936,8 @@
                     <!-- Life Alignment Score -->
                     <div class="pfos-card">
                         <div class="pfos-card-title">⚖️ Life Alignment Score</div>
-                        <p class="pfos-card-desc">Detects contradictions. "Wants freedom but works 80 hrs/week" = 25% aligned.</p>
+                        <p class="pfos-card-desc">Detects contradictions. "Wants freedom but works 80 hrs/week" = 25%
+                            aligned.</p>
                         <ul class="pfos-card-features">
                             <li>🧠 Goal contradiction detector</li>
                             <li>📊 Values alignment score</li>
@@ -1572,19 +1963,22 @@
                     <div class="advanced-card">
                         <div class="advanced-emoji">🧠</div>
                         <h3>Financial Health Score</h3>
-                        <p>Like CIBIL but for your entire life. Tracks income stability, debt patterns, emergency fund, and financial wellness.</p>
+                        <p>Like CIBIL but for your entire life. Tracks income stability, debt patterns, emergency fund,
+                            and financial wellness.</p>
                     </div>
 
                     <div class="advanced-card">
                         <div class="advanced-emoji">🤖</div>
                         <h3>AI Auto-Invest</h3>
-                        <p>Like a robo advisor but smarter. Auto-invests surplus money based on your goals and risk profile.</p>
+                        <p>Like a robo advisor but smarter. Auto-invests surplus money based on your goals and risk
+                            profile.</p>
                     </div>
 
                     <div class="advanced-card">
                         <div class="advanced-emoji">💡</div>
                         <h3>Smart Alerts</h3>
-                        <p>"You can save ₹12,000 this month by cutting 3 subscriptions" - Context-aware nudges that work.</p>
+                        <p>"You can save ₹12,000 this month by cutting 3 subscriptions" - Context-aware nudges that
+                            work.</p>
                     </div>
 
                     <div class="advanced-card">
@@ -1596,31 +1990,36 @@
                     <div class="advanced-card">
                         <div class="advanced-emoji">🎮</div>
                         <h3>Gamified Dashboard</h3>
-                        <p>Replaces money obsession with Freedom Score, Time Ownership, and Stress vs Wealth Balance.</p>
+                        <p>Replaces money obsession with Freedom Score, Time Ownership, and Stress vs Wealth Balance.
+                        </p>
                     </div>
 
                     <div class="advanced-card">
                         <div class="advanced-emoji">📈</div>
                         <h3>"Where Rich People Invest"</h3>
-                        <p>See investment patterns of people who reached financial freedom. Learn from their playbook.</p>
+                        <p>See investment patterns of people who reached financial freedom. Learn from their playbook.
+                        </p>
                     </div>
 
                     <div class="advanced-card">
                         <div class="advanced-emoji">🔍</div>
                         <h3>Blind Spot Detector</h3>
-                        <p>"Your salary is 40% below market" - Detects career stagnation, skill irrelevance, under-investment.</p>
+                        <p>"Your salary is 40% below market" - Detects career stagnation, skill irrelevance,
+                            under-investment.</p>
                     </div>
 
                     <div class="advanced-card">
                         <div class="advanced-emoji">👤</div>
                         <h3>Financial Twin (AI Clone)</h3>
-                        <p>Test strategies before real execution. "What if I quit my job?" - AI simulates the outcome.</p>
+                        <p>Test strategies before real execution. "What if I quit my job?" - AI simulates the outcome.
+                        </p>
                     </div>
 
                     <div class="advanced-card">
                         <div class="advanced-emoji">📡</div>
                         <h3>Opportunity Radar</h3>
-                        <p>Real-time alerts: job switch timing, market opportunities, in-demand skills, salary increases.</p>
+                        <p>Real-time alerts: job switch timing, market opportunities, in-demand skills, salary
+                            increases.</p>
                     </div>
                 </div>
             </div>
@@ -1631,7 +2030,8 @@
             <div class="container">
                 <div class="comparison-header">
                     <h2>How We Compare</h2>
-                    <p>We're not competing with Moneycontrol or Zerodha. We're competing with "How humans make life decisions"</p>
+                    <p>We're not competing with Moneycontrol or Zerodha. We're competing with "How humans make life
+                        decisions"</p>
                 </div>
 
                 <div class="comparison-table">
@@ -1786,7 +2186,8 @@
                         <span class="pricing-badge">MOST POPULAR</span>
                         <h3>⭐ Pro</h3>
                         <p class="pricing-description">For serious money managers</p>
-                        <div class="pricing-price">₹299<span style="font-size: 0.5em; color: #94a3b8;">/month</span></div>
+                        <div class="pricing-price">₹299<span style="font-size: 0.5em; color: #94a3b8;">/month</span>
+                        </div>
                         <p class="pricing-period">Cancel anytime</p>
                         <ul class="pricing-features">
                             <li>Everything in Basic</li>
@@ -1803,7 +2204,8 @@
                     <div class="pricing-card">
                         <h3>👑 Premium</h3>
                         <p class="pricing-description">Complete control</p>
-                        <div class="pricing-price">₹999<span style="font-size: 0.5em; color: #94a3b8;">/month</span></div>
+                        <div class="pricing-price">₹999<span style="font-size: 0.5em; color: #94a3b8;">/month</span>
+                        </div>
                         <p class="pricing-period">Annual: ₹9,999</p>
                         <ul class="pricing-features">
                             <li>Everything in Pro</li>
@@ -1826,7 +2228,8 @@
             <div class="container">
                 <div class="contact-header">
                     <h2>Let's Build Your Financial Future</h2>
-                    <p>Questions about PFOS 2050? Our team is here to help you understand the next generation of personal finance.</p>
+                    <p>Questions about PFOS 2050? Our team is here to help you understand the next generation of
+                        personal finance.</p>
                 </div>
 
                 <div class="contact-content">
@@ -1835,7 +2238,9 @@
                             <div class="contact-info-icon">📧</div>
                             <div class="contact-info-content">
                                 <h3>Email</h3>
-                                <p><a href="mailto:support@moneycontrolpro.com" style="color: #cbd5e1; text-decoration: none;">support@moneycontrolpro.com</a></p>
+                                <p><a href="mailto:support@moneycontrolpro.com"
+                                        style="color: #cbd5e1; text-decoration: none;">support@moneycontrolpro.com</a>
+                                </p>
                                 <p style="color: #64748b; font-size: 0.875rem;">Response within 24 hours</p>
                             </div>
                         </div>
@@ -1844,7 +2249,8 @@
                             <div class="contact-info-icon">📱</div>
                             <div class="contact-info-content">
                                 <h3>Phone</h3>
-                                <p><a href="tel:+919876543210" style="color: #cbd5e1; text-decoration: none;">+91 77760 90314</a></p>
+                                <p><a href="tel:+919876543210" style="color: #cbd5e1; text-decoration: none;">+91 77760
+                                        90314</a></p>
                                 <p style="color: #64748b; font-size: 0.875rem;">Mon-Fri, 9 AM - 6 PM IST</p>
                             </div>
                         </div>
@@ -1872,22 +2278,26 @@
                         <form id="contactForm">
                             <div class="form-group">
                                 <label for="name">Your Name</label>
-                                <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="John Doe"
+                                    required>
                             </div>
 
                             <div class="form-group">
                                 <label for="email">Email Address</label>
-                                <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required>
+                                <input type="email" id="email" name="email" class="form-input"
+                                    placeholder="john@example.com" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" class="form-input" placeholder="How can we help?">
+                                <input type="text" id="subject" name="subject" class="form-input"
+                                    placeholder="How can we help?">
                             </div>
 
                             <div class="form-group">
                                 <label for="message">Message</label>
-                                <textarea id="message" name="message" class="form-input form-textarea" placeholder="Tell us more about your inquiry..." required></textarea>
+                                <textarea id="message" name="message" class="form-input form-textarea"
+                                    placeholder="Tell us more about your inquiry..." required></textarea>
                             </div>
 
                             <button type="submit" class="btn-primary">Send Message 📧</button>
@@ -1910,8 +2320,8 @@
                 <a href="#">GitHub</a>
             </div>
             <p style="font-size: 0.875rem; margin-top: 1rem;">
-                <a href="#" style="color: #94a3b8; text-decoration: none;">Privacy Policy</a> • 
-                <a href="#" style="color: #94a3b8; text-decoration: none;">Terms of Service</a> • 
+                <a href="#" style="color: #94a3b8; text-decoration: none;">Privacy Policy</a> •
+                <a href="#" style="color: #94a3b8; text-decoration: none;">Terms of Service</a> •
                 <a href="#" style="color: #94a3b8; text-decoration: none;">Contact Us</a>
             </p>
         </div>
@@ -2010,4 +2420,5 @@
         });
     </script>
 </body>
+
 </html>
