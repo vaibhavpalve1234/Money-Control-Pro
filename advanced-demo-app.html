@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Money Control Pro - Advanced Interactive Demo</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
             --primary: #0f3460;
             --secondary: #10b981;
@@ -17,8 +23,11 @@
             --light-text: #f8fafc;
             --card-bg: #0f2a42;
         }
-        
-        html { scroll-behavior: smooth; }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: var(--dark-bg);
             color: var(--light-text);
@@ -74,6 +83,54 @@
 
         .header-stat {
             text-align: center;
+        }
+
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: #0f3460;
+                padding: 1rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .header-wrapper {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .header-stats {
+                display: none;
+                /* hide stats on mobile for clean UI */
+            }
         }
 
         .stat-value {
@@ -133,8 +190,15 @@
         }
 
         @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .ai-header {
@@ -210,8 +274,13 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         /* Dashboard Grid */
@@ -331,7 +400,8 @@
             font-size: 0.95rem;
         }
 
-        .form-input, .form-select {
+        .form-input,
+        .form-select {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(16, 185, 129, 0.3);
             color: var(--light-text);
@@ -341,7 +411,8 @@
             transition: all 0.3s;
         }
 
-        .form-input:focus, .form-select:focus {
+        .form-input:focus,
+        .form-select:focus {
             outline: none;
             border-color: var(--accent);
             box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
@@ -627,7 +698,8 @@
                 grid-template-columns: auto 1fr;
             }
 
-            .list-item-amount, .btn-delete {
+            .list-item-amount,
+            .btn-delete {
                 grid-column: 2;
             }
 
@@ -637,16 +709,32 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Top Banner -->
     <div class="top-banner">
         ✨ Money Control Pro - Advanced Demo | Test Full Features Interactively
     </div>
 
-    <!-- Header -->
     <div class="app-header">
         <div class="header-wrapper">
+
             <div class="header-brand">💰 Money Control Pro</div>
+
+            <!-- Hamburger Button -->
+            <div class="menu-toggle" onclick="toggleMenu()">
+                ☰
+            </div>
+
+            <!-- Navigation -->
+            <div class="nav-menu" id="navMenu">
+                <a href="#">Overview</a>
+                <a href="#">Expenses</a>
+                <a href="#">Budgets</a>
+                <a href="#">Goals</a>
+                <a href="#">Insights</a>
+            </div>
+
             <div class="header-stats">
                 <div class="header-stat">
                     <div class="stat-value" id="headerTotalSpent">₹0</div>
@@ -656,18 +744,12 @@
                     <div class="stat-value" id="headerBalance">₹0</div>
                     <div class="stat-label">Available</div>
                 </div>
-                <div class="header-stat">
-                    <div class="stat-value" id="headerSaved">₹0</div>
-                    <div class="stat-label">Saved This Month</div>
-                </div>
             </div>
+
             <div class="user-profile">
                 <div class="avatar">RD</div>
-                <div>
-                    <div class="user-name">Raj Desai</div>
-                    <div class="user-email">raj@example.com</div>
-                </div>
             </div>
+
         </div>
     </div>
 
@@ -682,7 +764,13 @@
                 </div>
             </div>
             <div class="ai-insight">
-                📊 <strong>Analysis:</strong> You've spent <span class="insight-stat">₹<span id="aiTotalSpent">0</span></span> this month across <span class="insight-stat" id="aiCategories">0</span> categories. Your top spending is on <span class="insight-stat" id="aiTopCategory">Food</span>. Based on your pattern, you can save <span class="insight-stat">₹<span id="aiSavings">0</span>/month</span> by optimizing spending. 💡 <strong>Recommendation:</strong> <span id="aiRecommendation">Add your first expense to get personalized insights</span>
+                📊 <strong>Analysis:</strong> You've spent <span class="insight-stat">₹<span
+                        id="aiTotalSpent">0</span></span> this month across <span class="insight-stat"
+                    id="aiCategories">0</span> categories. Your top spending is on <span class="insight-stat"
+                    id="aiTopCategory">Food</span>. Based on your pattern, you can save <span
+                    class="insight-stat">₹<span id="aiSavings">0</span>/month</span> by optimizing spending. 💡
+                <strong>Recommendation:</strong> <span id="aiRecommendation">Add your first expense to get personalized
+                    insights</span>
             </div>
         </div>
 
@@ -758,22 +846,27 @@
                 <div style="padding: 1rem 0;">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
                         <span>Overall Score</span>
-                        <span style="font-size: 1.5rem; font-weight: 900; color: var(--accent);" id="healthScore">-</span>
+                        <span style="font-size: 1.5rem; font-weight: 900; color: var(--accent);"
+                            id="healthScore">-</span>
                     </div>
                     <div class="progress-bar">
                         <div class="progress-fill" id="healthBar" style="width: 0%"></div>
                     </div>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
-                    <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 0.5rem;">
+                <div
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
+                    <div
+                        style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 0.5rem;">
                         <div style="color: var(--accent); font-weight: 700;">Spending Control</div>
                         <div style="color: #94a3b8; font-size: 0.9rem;">75/100</div>
                     </div>
-                    <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 0.5rem;">
+                    <div
+                        style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 0.5rem;">
                         <div style="color: var(--accent); font-weight: 700;">Budget Adherence</div>
                         <div style="color: #94a3b8; font-size: 0.9rem;">68/100</div>
                     </div>
-                    <div style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 0.5rem;">
+                    <div
+                        style="text-align: center; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 0.5rem;">
                         <div style="color: var(--accent); font-weight: 700;">Savings Rate</div>
                         <div style="color: #94a3b8; font-size: 0.9rem;">82/100</div>
                     </div>
@@ -1008,7 +1101,7 @@
             <div class="list-container">
                 <div style="margin-bottom: 2rem;">
                     <h3 style="color: var(--light-text); margin-bottom: 1.5rem;">💬 Latest Tips from Community</h3>
-                    
+
                     <div class="list-item">
                         <div class="list-item-icon">💡</div>
                         <div class="list-item-content">
@@ -1084,12 +1177,12 @@
         // Load sample data on startup
         function loadSampleData() {
             expenses = [
-                { id: 1, name: 'Morning Coffee', amount: 120, category: 'food', date: new Date(Date.now() - 86400000*6), payment: 'upi', notes: '' },
-                { id: 2, name: 'Lunch - Restaurant', amount: 450, category: 'food', date: new Date(Date.now() - 86400000*6), payment: 'card', notes: '' },
-                { id: 3, name: 'Uber Ride', amount: 250, category: 'transport', date: new Date(Date.now() - 86400000*5), payment: 'upi', notes: '' },
-                { id: 4, name: 'Movie Ticket', amount: 300, category: 'entertainment', date: new Date(Date.now() - 86400000*4), payment: 'cash', notes: '' },
-                { id: 5, name: 'Grocery Shopping', amount: 1200, category: 'food', date: new Date(Date.now() - 86400000*3), payment: 'card', notes: '' },
-                { id: 6, name: 'Gym Membership', amount: 500, category: 'health', date: new Date(Date.now() - 86400000*2), payment: 'upi', notes: '' },
+                { id: 1, name: 'Morning Coffee', amount: 120, category: 'food', date: new Date(Date.now() - 86400000 * 6), payment: 'upi', notes: '' },
+                { id: 2, name: 'Lunch - Restaurant', amount: 450, category: 'food', date: new Date(Date.now() - 86400000 * 6), payment: 'card', notes: '' },
+                { id: 3, name: 'Uber Ride', amount: 250, category: 'transport', date: new Date(Date.now() - 86400000 * 5), payment: 'upi', notes: '' },
+                { id: 4, name: 'Movie Ticket', amount: 300, category: 'entertainment', date: new Date(Date.now() - 86400000 * 4), payment: 'cash', notes: '' },
+                { id: 5, name: 'Grocery Shopping', amount: 1200, category: 'food', date: new Date(Date.now() - 86400000 * 3), payment: 'card', notes: '' },
+                { id: 6, name: 'Gym Membership', amount: 500, category: 'health', date: new Date(Date.now() - 86400000 * 2), payment: 'upi', notes: '' },
                 { id: 7, name: 'Netflix Subscription', amount: 199, category: 'subscriptions', date: new Date(Date.now() - 86400000), payment: 'card', notes: '' },
                 { id: 8, name: 'Starbucks', amount: 280, category: 'food', date: new Date(), payment: 'card', notes: '' },
             ];
@@ -1113,7 +1206,7 @@
             btn.addEventListener('click', (e) => {
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
+
                 e.target.classList.add('active');
                 const tabId = e.target.getAttribute('data-tab');
                 document.getElementById(tabId).classList.add('active');
@@ -1122,7 +1215,10 @@
 
         // Set today's date
         document.getElementById('expenseDate').valueAsDate = new Date();
-        document.getElementById('goalDate').valueAsDate = new Date(Date.now() + 30*86400000);
+        document.getElementById('goalDate').valueAsDate = new Date(Date.now() + 30 * 86400000);
+        function toggleMenu() {
+            document.getElementById("navMenu").classList.toggle("active");
+        }
 
         // Add Expense
         function addExpense() {
@@ -1356,7 +1452,7 @@
                 const spent = expenses
                     .filter(e => e.category === budget.category)
                     .reduce((sum, e) => sum + e.amount, 0);
-                
+
                 const percentage = (spent / budget.amount) * 100;
                 const status = percentage > 100 ? 'Over Budget!' : percentage > 80 ? 'Warning' : 'On Track';
 
@@ -1527,7 +1623,7 @@
         function updateInsights() {
             const total = expenses.reduce((sum, e) => sum + e.amount, 0);
             const avgExpense = expenses.length > 0 ? total / expenses.length : 0;
-            
+
             // Spending Insight
             if (expenses.length > 0) {
                 const trend = total > 50000 ? '📈 Higher than budget' : '✅ Within budget';
@@ -1593,4 +1689,5 @@
         loadSampleData();
     </script>
 </body>
+
 </html>

@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Money Control Pro - AI-Powered Personal Finance OS for India</title>
-    <meta name="description" content="Take control of your finances with Money Control Pro. AI-powered insights, smart budgeting, investment tracking for Indians. Free forever basic plan.">
+    <meta name="description"
+        content="Take control of your finances with Money Control Pro. AI-powered insights, smart budgeting, investment tracking for Indians. Free forever basic plan.">
     <meta property="og:title" content="Money Control Pro - Your Financial Operating System">
     <meta property="og:description" content="AI-powered personal finance management built for India">
     <meta property="og:type" content="website">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -61,6 +65,7 @@
         }
 
         /* ==================== HEADER ==================== */
+        /* ==================== HEADER ==================== */
         header {
             position: sticky;
             top: 0;
@@ -79,6 +84,7 @@
             align-items: center;
         }
 
+        /* LOGO */
         .logo {
             font-size: 1.75rem;
             font-weight: 800;
@@ -86,20 +92,19 @@
             background: linear-gradient(135deg, #10b981, #d4af37);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-family: 'Sora', sans-serif;
         }
 
+        /* NAV */
         nav {
             display: flex;
-            gap: 3rem;
+            gap: 2rem;
             align-items: center;
         }
 
         nav a {
             color: var(--gray);
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: 0.3s;
             position: relative;
         }
 
@@ -115,17 +120,60 @@
             width: 0;
             height: 2px;
             background: var(--secondary);
-            transition: width 0.3s ease;
+            transition: 0.3s;
         }
 
         nav a:hover::after {
             width: 100%;
         }
 
+        /* CTA */
         .header-cta {
             display: flex;
             gap: 1rem;
-            align-items: center;
+        }
+
+        /* ==================== MOBILE MENU ==================== */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        /* MOBILE NAV */
+        .mobile-nav {
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: #0a1929;
+            display: none;
+            flex-direction: column;
+            padding: 1.5rem;
+            gap: 1rem;
+            border-top: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .mobile-nav a {
+            color: white;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 768px) {
+
+            nav {
+                display: none;
+            }
+
+            .header-cta {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
         }
 
         /* ==================== BUTTONS ==================== */
@@ -157,7 +205,7 @@
             left: 100%;
         }
 
-        .btn > * {
+        .btn>* {
             position: relative;
             z-index: 1;
         }
@@ -239,8 +287,15 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(30px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(30px);
+            }
         }
 
         .hero-content {
@@ -266,6 +321,7 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -355,6 +411,7 @@
                 opacity: 0;
                 transform: translateY(40px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -936,8 +993,15 @@
 
         /* ==================== ANIMATIONS ==================== */
         @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(16, 185, 129, 0.6); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+            }
         }
 
         .feature-card:hover {
@@ -949,6 +1013,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -961,14 +1026,32 @@
             animation: fadeInUp 0.6s ease forwards;
         }
 
-        .feature-card:nth-child(1) { animation-delay: 0.1s; }
-        .feature-card:nth-child(2) { animation-delay: 0.2s; }
-        .feature-card:nth-child(3) { animation-delay: 0.3s; }
-        .feature-card:nth-child(4) { animation-delay: 0.4s; }
-        .feature-card:nth-child(5) { animation-delay: 0.5s; }
-        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+        .feature-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .feature-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .feature-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .feature-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .feature-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .feature-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
     </style>
 </head>
+
 <body>
     <!-- ==================== HEADER ==================== -->
     <header>
@@ -980,25 +1063,43 @@
                 <a href="#pricing">Pricing</a>
                 <a href="#testimonials">Testimonials</a>
             </nav>
+
             <div class="header-cta">
-                <a href="#demo" class="btn btn-secondary">Live Demo</a>
+                <a href="https://money-control-pro-beta.vercel.app/" target="_blank" class="btn btn-secondary">
+                    🚀 Live Demo
+                </a>
                 <a href="#signup" class="btn btn-primary">Get Started Free</a>
             </div>
+            <div class="nav-right">
+                <span>🔔</span>
+                <span>🎤</span>
+            </div>
+            <img src="avatar.png" class="avatar" />
         </div>
+
+        <div class="mobile-nav" id="mobileMenu">
+            <a href="#">Features</a>
+            <a href="#">Pricing</a>
+            <a href="#">Security</a>
+            <a href="https://money-control-pro-beta.vercel.app/" target="_blank">🚀 Live Demo</a>
+            <a href="#">Get Started</a>
+        </div>
+
     </header>
 
     <!-- ==================== HERO SECTION ==================== -->
     <section class="hero">
         <div class="hero-content">
             <div class="hero-badge">✨ AI-Powered Finance Dashboard</div>
-            
+
             <h1 class="hero-title">
                 Your Financial Operating System
                 <span class="hero-title-highlight"> Just Got Smarter</span>
             </h1>
 
             <p class="hero-subtitle">
-                AI-powered insights, smart budgeting, and investment tracking built specifically for Indians. Take control of your money with real-time analytics and personalized recommendations.
+                AI-powered insights, smart budgeting, and investment tracking built specifically for Indians. Take
+                control of your money with real-time analytics and personalized recommendations.
             </p>
 
             <div class="hero-stats">
@@ -1017,7 +1118,7 @@
             </div>
 
             <div class="hero-cta">
-                <a href="#app" class="btn btn-primary hero-cta-primary">Launch App (Free)</a>
+                <a href="https://money-control-pro-beta.vercel.app/" class="btn btn-primary hero-cta-primary">Launch App (Free)</a>
                 <a href="#demo" class="btn btn-secondary">Watch Demo</a>
             </div>
         </div>
@@ -1082,37 +1183,43 @@
             <div class="feature-card">
                 <div class="feature-icon">🤖</div>
                 <h3 class="feature-title">AI Financial Brain</h3>
-                <p class="feature-desc">Get personalized insights powered by machine learning. Spot spending patterns, predict future expenses, and get actionable recommendations.</p>
+                <p class="feature-desc">Get personalized insights powered by machine learning. Spot spending patterns,
+                    predict future expenses, and get actionable recommendations.</p>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">📊</div>
                 <h3 class="feature-title">Real-Time Analytics</h3>
-                <p class="feature-desc">Beautiful charts and visualizations that update instantly. See your financial health at a glance with comprehensive dashboards.</p>
+                <p class="feature-desc">Beautiful charts and visualizations that update instantly. See your financial
+                    health at a glance with comprehensive dashboards.</p>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">🏦</div>
                 <h3 class="feature-title">Bank Account Sync</h3>
-                <p class="feature-desc">Connect your bank accounts for automatic transaction tracking. No manual entry needed. Supports all major Indian banks.</p>
+                <p class="feature-desc">Connect your bank accounts for automatic transaction tracking. No manual entry
+                    needed. Supports all major Indian banks.</p>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">🎯</div>
                 <h3 class="feature-title">Smart Budgeting</h3>
-                <p class="feature-desc">Create intelligent budgets using the 50/30/20 rule. Get alerts before you exceed limits. Track against real spending in real-time.</p>
+                <p class="feature-desc">Create intelligent budgets using the 50/30/20 rule. Get alerts before you exceed
+                    limits. Track against real spending in real-time.</p>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">📈</div>
                 <h3 class="feature-title">Investment Hub</h3>
-                <p class="feature-desc">Track stocks, mutual funds, SIPs, and crypto all in one place. See your portfolio performance with India-specific tax calculations.</p>
+                <p class="feature-desc">Track stocks, mutual funds, SIPs, and crypto all in one place. See your
+                    portfolio performance with India-specific tax calculations.</p>
             </div>
 
             <div class="feature-card">
                 <div class="feature-icon">🔔</div>
                 <h3 class="feature-title">Smart Alerts</h3>
-                <p class="feature-desc">Get notified when you're approaching budget limits, investment milestones, or bill reminders. Stay in control without stress.</p>
+                <p class="feature-desc">Get notified when you're approaching budget limits, investment milestones, or
+                    bill reminders. Stay in control without stress.</p>
             </div>
         </div>
 
@@ -1188,7 +1295,7 @@
                 <p class="pricing-desc">Perfect for getting started</p>
                 <div class="pricing-value">₹0</div>
                 <p class="pricing-period">Forever free</p>
-                
+
                 <ul class="pricing-features">
                     <li class="pricing-feature">
                         <span class="pricing-feature-check">✓</span>
@@ -1217,7 +1324,7 @@
                 <p class="pricing-desc">For serious money management</p>
                 <div class="pricing-value">₹299</div>
                 <p class="pricing-period">per month (or ₹2,990/year)</p>
-                
+
                 <ul class="pricing-features">
                     <li class="pricing-feature">
                         <span class="pricing-feature-check">✓</span>
@@ -1253,7 +1360,7 @@
                 <p class="pricing-desc">Complete financial control</p>
                 <div class="pricing-value">₹999</div>
                 <p class="pricing-period">per month (or ₹9,990/year)</p>
-                
+
                 <ul class="pricing-features">
                     <li class="pricing-feature">
                         <span class="pricing-feature-check">✓</span>
@@ -1286,7 +1393,8 @@
         </div>
 
         <div style="text-align: center; margin-top: 2rem;">
-            <p style="color: var(--gray); margin-bottom: 1rem;">💳 First 30 days free on Pro & Premium. No credit card required.</p>
+            <p style="color: var(--gray); margin-bottom: 1rem;">💳 First 30 days free on Pro & Premium. No credit card
+                required.</p>
         </div>
     </section>
 
@@ -1306,7 +1414,9 @@
                 </div>
                 <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
                 <p class="testimonial-text">
-                    "I found <span class="testimonial-highlight">₹15,000 in forgotten subscriptions</span>. Cancelled them all. Now I'm saving <span class="testimonial-highlight">₹25,000/month</span> with Money Control Pro. The AI recommendations are insanely accurate!"
+                    "I found <span class="testimonial-highlight">₹15,000 in forgotten subscriptions</span>. Cancelled
+                    them all. Now I'm saving <span class="testimonial-highlight">₹25,000/month</span> with Money Control
+                    Pro. The AI recommendations are insanely accurate!"
                 </p>
             </div>
 
@@ -1320,7 +1430,9 @@
                 </div>
                 <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
                 <p class="testimonial-text">
-                    "Finally understand where my money goes! I started my <span class="testimonial-highlight">first SIP with ₹5,000/month</span> after tracking with Money Control Pro. The budgeting feature is game-changing. Highly recommend!"
+                    "Finally understand where my money goes! I started my <span class="testimonial-highlight">first SIP
+                        with ₹5,000/month</span> after tracking with Money Control Pro. The budgeting feature is
+                    game-changing. Highly recommend!"
                 </p>
             </div>
 
@@ -1334,7 +1446,9 @@
                 </div>
                 <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
                 <p class="testimonial-text">
-                    "The 50/30/20 rule + Money Control Pro made me <span class="testimonial-highlight">save 30% in 6 months</span>. My emergency fund is now solid. This is the tool every Indian needs. Worth every rupee!"
+                    "The 50/30/20 rule + Money Control Pro made me <span class="testimonial-highlight">save 30% in 6
+                        months</span>. My emergency fund is now solid. This is the tool every Indian needs. Worth every
+                    rupee!"
                 </p>
             </div>
         </div>
@@ -1344,9 +1458,11 @@
     <section id="signup">
         <div class="cta-section">
             <h2 class="cta-title">Join 50,000+ Indians Taking Control</h2>
-            <p class="cta-subtitle">Start managing your money smarter today. First 30 days free on Pro & Premium plans.</p>
+            <p class="cta-subtitle">Start managing your money smarter today. First 30 days free on Pro & Premium plans.
+            </p>
             <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                <a href="advanced-demo-app.html" class="btn btn-primary" style="display: inline-block;">🎮 Try Interactive Demo</a>
+                <a href="advanced-demo-app.html" class="btn btn-primary" style="display: inline-block;">🎮 Try
+                    Interactive Demo</a>
                 <a href="#" class="btn btn-secondary" style="display: inline-block;">📞 Contact Us</a>
             </div>
         </div>
@@ -1359,7 +1475,7 @@
                 <h4>Product</h4>
                 <a href="feature.html" class="footer-link">Features</a>
                 <a href="#pricing" class="footer-link">Pricing</a>
-                <a href="advanced-demo-app.html" class="footer-link">Live Demo</a>
+                <a href="https://money-control-pro-beta.vercel.app/" target="_blank" class="footer-link">Live Demo</a>
                 <a href="#" class="footer-link">Security</a>
             </div>
 
@@ -1446,6 +1562,12 @@
                 // Replace with your analytics code
             });
         });
+        document.querySelectorAll(".mobile-nav a").forEach(link => {
+            link.addEventListener("click", () => {
+                document.getElementById("mobileMenu").classList.remove("show");
+            });
+        });
     </script>
 </body>
+
 </html>
