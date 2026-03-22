@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - Money Control Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f3460;
+            --secondary: #10b981;
+            --secondary-dark: #059669;
+            --accent: #d4af37;
+            --dark-bg: #0a1929;
+            --light-text: #f8fafc;
+            --gray: #94a3b8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #051a2f 50%, #0a1929 100%);
+            background-attachment: fixed;
+            color: var(--light-text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 25, 41, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+            padding: 1rem 2rem;
+        }
+
+        .header-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #10b981, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--gray);
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        .btn {
+            padding: 0.875rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.4);
+        }
+
+        /* ==================== SECTIONS ==================== */
+        section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-family: 'Sora', sans-serif;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--gray);
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ==================== FEATURES GRID ==================== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(15, 42, 66, 0.5), rgba(16, 185, 129, 0.05));
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .feature-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-desc {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-points {
+            list-style: none;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-points li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .feature-points li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* ==================== CTA SECTION ==================== */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(212, 175, 55, 0.1));
+            border: 2px solid rgba(16, 185, 129, 0.3);
+            border-radius: 1.5rem;
+            padding: 3rem 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            margin: 4rem 0;
+        }
+
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-subtitle {
+            color: var(--gray);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: linear-gradient(180deg, rgba(5, 26, 47, 0.8), var(--dark-bg));
+            border-top: 1px solid rgba(16, 185, 129, 0.1);
+            padding: 4rem 2rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 2rem;
+        }
+
+        .footer-link {
+            color: var(--gray);
+            margin: 0 1.5rem;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .footer-link:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            color: var(--gray);
+            font-size: 0.9rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            section {
+                padding: 4rem 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn, .btn-secondary {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ==================== HEADER ==================== -->
+    <header>
+        <div class="header-wrapper">
+            <a href="index.html" class="logo">💰 Money Control Pro</a>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="#features">Features</a>
+                <a href="pricing.html">Pricing</a>
+            </nav>
+            <a href="index.html" class="btn">Get Started Free</a>
+        </div>
+    </header>
+
+    <!-- ==================== FEATURES SECTION ==================== -->
+    <section id="features">
+        <h1 class="section-title">Powerful Features Built For You</h1>
+        <p class="section-subtitle">Everything you need to master your finances in one beautiful interface. Discover all the tools that make Money Control Pro the best choice.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3 class="feature-title">AI Financial Brain</h3>
+                <p class="feature-desc">Intelligent financial insights powered by machine learning. Get smarter about your money.</p>
+                <ul class="feature-points">
+                    <li>Spending pattern analysis</li>
+                    <li>Expense predictions</li>
+                    <li>Smart recommendations</li>
+                    <li>Anomaly detection</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Real-Time Analytics</h3>
+                <p class="feature-desc">Beautiful charts and live dashboards that update instantly. See your financial health at a glance.</p>
+                <ul class="feature-points">
+                    <li>Live net worth tracking</li>
+                    <li>Income vs expense charts</li>
+                    <li>Category breakdown</li>
+                    <li>Monthly & yearly trends</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🏦</div>
+                <h3 class="feature-title">Bank Account Sync</h3>
+                <p class="feature-desc">Connect all your accounts automatically. No manual entry needed ever again.</p>
+                <ul class="feature-points">
+                    <li>All major Indian banks</li>
+                    <li>Auto transaction import</li>
+                    <li>Real-time balance updates</li>
+                    <li>Zero manual work</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">Smart Budgeting</h3>
+                <p class="feature-desc">Budget like a pro with the proven 50/30/20 rule. Get alerts before you exceed limits.</p>
+                <ul class="feature-points">
+                    <li>Custom budgets</li>
+                    <li>Spending alerts</li>
+                    <li>Real-time tracking</li>
+                    <li>Smart recommendations</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3 class="feature-title">Investment Hub</h3>
+                <p class="feature-desc">Track all your investments in one place. Stocks, mutual funds, SIPs, crypto and more.</p>
+                <ul class="feature-points">
+                    <li>Stocks & mutual funds</li>
+                    <li>SIP tracking</li>
+                    <li>Portfolio analysis</li>
+                    <li>Tax calculations</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3 class="feature-title">Bank-Level Security</h3>
+                <p class="feature-desc">Your financial data is protected with enterprise-grade security standards.</p>
+                <ul class="feature-points">
+                    <li>256-bit encryption</li>
+                    <li>ISO 27001 certified</li>
+                    <li>2FA support</li>
+                    <li>Privacy first approach</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💼</div>
+                <h3 class="feature-title">Family Wallet</h3>
+                <p class="feature-desc">Manage finances with your partner or family members. Collaborate and share insights.</p>
+                <ul class="feature-points">
+                    <li>Multi-user support</li>
+                    <li>Shared budgets</li>
+                    <li>Role-based access</li>
+                    <li>Activity logs</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔔</div>
+                <h3 class="feature-title">Smart Alerts</h3>
+                <p class="feature-desc">Get notified about important financial events. Never miss a deadline or milestone.</p>
+                <ul class="feature-points">
+                    <li>Budget limit alerts</li>
+                    <li>Bill reminders</li>
+                    <li>Investment milestones</li>
+                    <li>Custom notifications</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🧮</div>
+                <h3 class="feature-title">FIRE Calculator</h3>
+                <p class="feature-desc">Plan your retirement and track progress towards financial independence.</p>
+                <ul class="feature-points">
+                    <li>FIRE goal tracking</li>
+                    <li>Retirement planning</li>
+                    <li>Compound interest calc</li>
+                    <li>Scenario analysis</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🧾</div>
+                <h3 class="feature-title">GST Tools</h3>
+                <p class="feature-desc">For business owners and freelancers. GST calculation and invoice generation.</p>
+                <ul class="feature-points">
+                    <li>GST calculator</li>
+                    <li>Invoice templates</li>
+                    <li>Tax reports</li>
+                    <li>Compliance tools</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3 class="feature-title">Voice Input</h3>
+                <p class="feature-desc">Add expenses by voice. Hands-free expense tracking on the go.</p>
+                <ul class="feature-points">
+                    <li>Voice recognition</li>
+                    <li>Fast entry</li>
+                    <li>Multiple languages</li>
+                    <li>Natural language</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📤</div>
+                <h3 class="feature-title">Bank Import</h3>
+                <p class="feature-desc">Import statements from Excel or CSV. Bulk data entry made easy.</p>
+                <ul class="feature-points">
+                    <li>Excel support</li>
+                    <li>CSV import</li>
+                    <li>Bank statement parsing</li>
+                    <li>Data validation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2 class="cta-title">Ready to Experience All These Features?</h2>
+            <p class="cta-subtitle">Start with our free plan today. Upgrade anytime you need more.</p>
+            <div class="cta-buttons">
+                <a href="https://money-control-pro-beta.vercel.app/" target="_blank" class="btn">🚀 Launch App (Free)</a>
+                <a href="pricing.html" class="btn btn-secondary">💰 View Pricing</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Home</a>
+                <a href="pricing.html" class="footer-link">Pricing</a>
+                <a href="#" class="footer-link">Privacy</a>
+                <a href="#" class="footer-link">Terms</a>
+                <a href="#" class="footer-link">Contact</a>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Money Control Pro. All rights reserved. Built for Indians, by Indians. 🇮🇳</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
